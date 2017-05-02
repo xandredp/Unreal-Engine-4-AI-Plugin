@@ -1,4 +1,0 @@
-D:\Users\Xandre.plo6323\Desktop\GameEnginePlugin\Source\GameEnginePlugin\GameEnginePlugin.Build.cs
-D:\Users\Xandre.plo6323\Desktop\GameEnginePlugin\Plugins\AI_Plugin\Source\AI_Plugin\AI_Plugin.Build.cs
-D:\Users\Xandre.plo6323\Desktop\GameEnginePlugin\Source\GameEnginePlugin.Target.cs
-D:\Users\Xandre.plo6323\Desktop\GameEnginePlugin\Source\GameEnginePluginEditor.Target.cs
