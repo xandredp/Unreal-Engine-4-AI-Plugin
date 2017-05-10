@@ -7,10 +7,19 @@
 		{
 			"Name": "GameEnginePlugin",
 			"Type": "Runtime",
-			"LoadingPhase": "Default"
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"Engine"
+			]
+		}
+	],
+	"Plugins": [
+		{
+			"Name": "AI_Plugin",
+			"Enabled": true
 		}
 	],
 	"AdditionalPluginDirectories": [
-		"/GameEnginePlugin/Plugins"
+		"/../../../../../../../../GameEnginePlugin/Plugins"
 	]
 }
