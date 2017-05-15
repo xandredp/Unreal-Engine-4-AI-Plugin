@@ -59,13 +59,7 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAICharacter); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AAICharacter)
 
 
-#define UE4_AI_Plugin_Source_GameEnginePlugin_AICharacter_h_12_PRIVATE_PROPERTY_OFFSET \
-	FORCEINLINE static uint32 __PPO__MyPluginComponent() { return STRUCT_OFFSET(AAICharacter, MyPluginComponent); } \
-	FORCEINLINE static uint32 __PPO__PatrollingPoints() { return STRUCT_OFFSET(AAICharacter, PatrollingPoints); } \
-	FORCEINLINE static uint32 __PPO__Hearing() { return STRUCT_OFFSET(AAICharacter, Hearing); } \
-	FORCEINLINE static uint32 __PPO__Sight() { return STRUCT_OFFSET(AAICharacter, Sight); }
-
-
+#define UE4_AI_Plugin_Source_GameEnginePlugin_AICharacter_h_12_PRIVATE_PROPERTY_OFFSET
 #define UE4_AI_Plugin_Source_GameEnginePlugin_AICharacter_h_9_PROLOG
 #define UE4_AI_Plugin_Source_GameEnginePlugin_AICharacter_h_12_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \

@@ -18,7 +18,7 @@ void AMyPluginComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	GLog->Log("BeginPlay inside plugin component");
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay inside plugin component"));
 }
 
 // Called every frame

@@ -5,6 +5,9 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
+#ifndef AI_PLUGIN_AIComponent_generated_h
+	#include "Public/AIComponent.h"
+#endif
 #ifndef AI_PLUGIN_MyPluginComponent_generated_h
 	#include "Public/MyPluginComponent.h"
 #endif

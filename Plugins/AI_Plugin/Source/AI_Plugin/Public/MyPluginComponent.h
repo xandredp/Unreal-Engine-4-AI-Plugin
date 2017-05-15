@@ -5,7 +5,7 @@
 #include "GameFramework/Actor.h"
 #include "MyPluginComponent.generated.h"
 
-UCLASS()
+UCLASS(ClassGroup = (Custom))
 class AI_PLUGIN_API AMyPluginComponent : public AActor
 {
 	GENERATED_BODY()
@@ -19,7 +19,4 @@ public:
 	
 	// Called every frame
 	virtual void Tick( float DeltaSeconds ) override;
-
-	
-	
 };
