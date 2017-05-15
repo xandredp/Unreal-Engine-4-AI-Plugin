@@ -14,9 +14,10 @@ class GAMEENGINEPLUGIN_API AAICharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AAICharacter();
-
-	//UPROPERTY(VisibleAnywhere)
-		//UAIComponent* MyAIComponent;
+	
+	// The component class 
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
+		class UAIComponent* MyAIComponent;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

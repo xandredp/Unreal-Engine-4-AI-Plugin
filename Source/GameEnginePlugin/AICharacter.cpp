@@ -9,8 +9,10 @@ AAICharacter::AAICharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	// Addign the component class to the character
+	MyAIComponent = CreateDefaultSubobject<UAIComponent>(TEXT("AIComponent"));
 
-	//MyAIComponent = CreateDefaultSubobject<UAIComponent>(FName("AIComponent"));
 }
 
 // Called when the game starts or when spawned

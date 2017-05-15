@@ -13,7 +13,7 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 	void UAIComponent::StaticRegisterNativesUAIComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UAIComponent, 2569586676);
+	IMPLEMENT_CLASS(UAIComponent, 666258645);
 	void AMyPluginComponent::StaticRegisterNativesAMyPluginComponent()
 	{
 	}
@@ -62,12 +62,13 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AIComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AIComponent.h"));
+				MetaData->SetValue(OuterClass, TEXT("ToolTip"), TEXT("This component can be added to any character"));
 				MetaData->SetValue(NewProp_Sight, TEXT("Category"), TEXT("AI Component|AI unit properties"));
 				MetaData->SetValue(NewProp_Sight, TEXT("ModuleRelativePath"), TEXT("Public/AIComponent.h"));
 				MetaData->SetValue(NewProp_Hearing, TEXT("Category"), TEXT("AI Component|AI unit properties"));
 				MetaData->SetValue(NewProp_Hearing, TEXT("ModuleRelativePath"), TEXT("Public/AIComponent.h"));
 				MetaData->SetValue(NewProp_Hearing, TEXT("ToolTip"), TEXT("AI properties"));
-				MetaData->SetValue(NewProp_PatrollingPoints, TEXT("Category"), TEXT("AI Component|Patrolling points"));
+				MetaData->SetValue(NewProp_PatrollingPoints, TEXT("Category"), TEXT("Patrolling points"));
 				MetaData->SetValue(NewProp_PatrollingPoints, TEXT("ModuleRelativePath"), TEXT("Public/AIComponent.h"));
 				MetaData->SetValue(NewProp_PatrollingPoints, TEXT("ToolTip"), TEXT("Array of target points for patrolling"));
 #endif
@@ -118,7 +119,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0xF76DD770;
+			Guid.A = 0x801EAB1A;
 			Guid.B = 0x6563B047;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;

@@ -5,6 +5,11 @@
 #include "MyPluginComponent.h"
 
 
+/***********************/
+//DO NOT USE THIS CLASS
+/***********************/
+
+
 // Sets default values
 AMyPluginComponent::AMyPluginComponent()
 {

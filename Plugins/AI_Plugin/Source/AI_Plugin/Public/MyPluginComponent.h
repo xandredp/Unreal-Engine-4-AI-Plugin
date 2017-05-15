@@ -2,6 +2,10 @@
 
 #pragma once
 
+/***********************/
+//DO NOT USE THIS CLASS
+/***********************/
+
 #include "GameFramework/Actor.h"
 #include "MyPluginComponent.generated.h"
 

@@ -5,7 +5,7 @@
 #include "Components/ActorComponent.h"
 #include "AIComponent.generated.h"
 
-
+// This component can be added to any character
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class AI_PLUGIN_API UAIComponent : public UActorComponent
 {
@@ -22,7 +22,7 @@ public:
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
 	// Array of target points for patrolling
-	UPROPERTY(Category = "AI Component|Patrolling points", EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(Category = "Patrolling points", EditAnywhere, BlueprintReadWrite)
 		TArray<AActor*> PatrollingPoints;
 
 	// AI properties
