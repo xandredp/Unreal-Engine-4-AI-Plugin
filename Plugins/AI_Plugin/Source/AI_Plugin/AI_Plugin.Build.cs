@@ -34,11 +34,14 @@ public class AI_Plugin : ModuleRules
 		
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
-			{
-				"CoreUObject",
+            {
 				"Engine",
-				"Slate",
-				"SlateCore",
+                "InputCore",
+                "Core",
+                "Slate",
+                "SlateCore",
+                "EditorStyle",
+                "CoreUObject"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -2,7 +2,8 @@
 
 #pragma once
 
-#include "Components/ActorComponent.h"
+//#include "Components/ActorComponent.h"
+#include "AI_Plugin/Private/AI_PluginPrivatePCH.h"
 #include "AIComponent.generated.h"
 
 // This component can be added to any character

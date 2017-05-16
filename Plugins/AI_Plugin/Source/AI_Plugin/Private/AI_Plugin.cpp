@@ -1,8 +1,11 @@
 // Copyright 1998-2016 Epic Games, Inc. All Rights Reserved.
 
 #include "AI_PluginPrivatePCH.h"
+#include "AI_Plugin.h"
 
 #define LOCTEXT_NAMESPACE "FAI_PluginModule"
+
+
 
 void FAI_PluginModule::StartupModule()
 {

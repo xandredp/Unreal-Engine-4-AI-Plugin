@@ -12,11 +12,13 @@
 	"SupportURL": "",
 	"CanContainContent": false,
 	"IsBetaVersion": false,
-	"Installed": true,
+  "Installed": true,
+  "EnabledByDefault": true,
+
 	"Modules": [
 		{
 			"Name": "AI_Plugin",
-			"Type": "Runtime",
+			"Type": "Editor",
 			"LoadingPhase": "Default"
 		}
 	]
