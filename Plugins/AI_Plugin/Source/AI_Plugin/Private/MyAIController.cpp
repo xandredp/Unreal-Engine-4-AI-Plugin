@@ -34,7 +34,7 @@ void AMyAIController::Possess(APawn* Pawn)
 		}
 
 		// Populate array of target points
-		UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMyTargetPoint::StaticClass(), PatrolTargetPoints);
+		//UGameplayStatics::GetAllActorsOfClass(GetWorld(), AMyTargetPoint::StaticClass(), PatrolTargetPoints);
 
 		//Start the behavior tree which corresponds to the specific character
 		BehaviorTreeComp->StartTree(*AIChar->BehaviorTree);

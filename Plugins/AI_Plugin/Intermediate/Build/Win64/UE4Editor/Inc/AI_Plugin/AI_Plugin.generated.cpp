@@ -17,11 +17,11 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 	void AMyAICharacter::StaticRegisterNativesAMyAICharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AMyAICharacter, 3403861658);
+	IMPLEMENT_CLASS(AMyAICharacter, 1202183269);
 	void AMyAIController::StaticRegisterNativesAMyAIController()
 	{
 	}
-	IMPLEMENT_CLASS(AMyAIController, 191013815);
+	IMPLEMENT_CLASS(AMyAIController, 2521659544);
 	void AMyTargetPoint::StaticRegisterNativesAMyTargetPoint()
 	{
 	}
@@ -30,9 +30,9 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 // Cross Module References
 	AIMODULE_API class UClass* Z_Construct_UClass_UBTTaskNode();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_AAIController();
-	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint();
 
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister();
@@ -94,7 +94,9 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AMyAICharacter), 0x0010000000010005, Z_Construct_UClass_UBehaviorTree_NoRegister());
+				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AMyAICharacter), 0x0010000000010001);
+				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AActor_NoRegister());
+				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AMyAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -102,6 +104,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("MyAICharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
+				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
 				MetaData->SetValue(NewProp_BehaviorTree, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_BehaviorTree, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
 #endif
@@ -131,8 +135,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AMyAIController), 0x0010000000000005);
-				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AActor_NoRegister());
 				UProperty* NewProp_LocationToGoKey = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("LocationToGoKey"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(LocationToGoKey, AMyAIController), 0x0010000000010001);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
@@ -141,8 +143,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("MyAIController.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/MyAIController.h"));
-				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
-				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("ModuleRelativePath"), TEXT("Public/MyAIController.h"));
 				MetaData->SetValue(NewProp_LocationToGoKey, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_LocationToGoKey, TEXT("ModuleRelativePath"), TEXT("Public/MyAIController.h"));
 				MetaData->SetValue(NewProp_LocationToGoKey, TEXT("ToolTip"), TEXT("Blackboard Keys"));
@@ -193,7 +193,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0xC70BDE3A;
+			Guid.A = 0x09F720F6;
 			Guid.B = 0xFB26EF24;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;

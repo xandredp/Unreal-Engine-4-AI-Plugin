@@ -14,8 +14,11 @@ public:
 	// Sets default values for this character's properties
 	AMyAICharacter();
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "AI")
+	UPROPERTY(EditAnywhere, Category = "AI")
 		class UBehaviorTree* BehaviorTree;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		TArray<AActor*> PatrolTargetPoints;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -26,6 +29,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	FORCEINLINE TArray<AActor*> GetAvailableTargetPoints() const { return PatrolTargetPoints; }
 	
 };

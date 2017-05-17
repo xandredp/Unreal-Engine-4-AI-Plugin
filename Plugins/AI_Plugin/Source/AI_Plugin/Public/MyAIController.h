@@ -21,8 +21,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName LocationToGoKey;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-		TArray<AActor*> PatrolTargetPoints;
+	//UPROPERTY(EditDefaultsOnly, Category = "AI")
+	//	TArray<AActor*> PatrolTargetPoints;
 
 	virtual void Possess(APawn* Pawn) override;
 
@@ -30,5 +30,5 @@ public:
 	AMyAIController();
 
 	FORCEINLINE UBlackboardComponent* GetBlackboardComp() const { return BlackboardComp; }
-	FORCEINLINE TArray<AActor*> GetAvailableTargetPoints() const { return PatrolTargetPoints; }
+	//FORCEINLINE TArray<AActor*> GetAvailableTargetPoints() const { return PatrolTargetPoints; }
 };
