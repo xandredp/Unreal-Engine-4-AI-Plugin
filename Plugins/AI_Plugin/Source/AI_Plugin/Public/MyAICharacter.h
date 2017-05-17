@@ -14,6 +14,9 @@ public:
 	// Sets default values for this character's properties
 	AMyAICharacter();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "AI")
+		class UBehaviorTree* BehaviorTree;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	

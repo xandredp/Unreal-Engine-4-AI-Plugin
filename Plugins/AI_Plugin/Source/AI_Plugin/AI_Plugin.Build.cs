@@ -41,7 +41,9 @@ public class AI_Plugin : ModuleRules
                 "Slate",
                 "SlateCore",
                 "EditorStyle",
-                "CoreUObject"
+                "CoreUObject",
+                "GameplayTasks",
+                "AIModule"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

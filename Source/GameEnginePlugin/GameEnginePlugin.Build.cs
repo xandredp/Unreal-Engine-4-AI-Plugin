@@ -6,7 +6,7 @@ public class GameEnginePlugin : ModuleRules
 {
 	public GameEnginePlugin(TargetInfo Target)
 	{
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AI_Plugin" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "AI_Plugin", "AIModule" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });
 

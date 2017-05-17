@@ -1,15 +1,2 @@
-﻿  Creating makefile for hot reloading GameEnginePluginEditor (no existing makefile)
-  Compiling game modules for hot reload
-  Parsing headers for GameEnginePluginEditor
-    Running UnrealHeaderTool "C:\Users\Owner\Documents\Github\UE4 AI Plugin\GameEnginePlugin.uproject" "C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-  Reflection code generated for GameEnginePluginEditor in 3.6101491 seconds
-  Performing 6 actions (4 in parallel)
-  Module.AI_Plugin.cpp
-  AI_Plugin.generated.cpp
-  GameEnginePlugin.generated.cpp
-  AICharacter.cpp
-  [5/6] Link UE4Editor-AI_Plugin-8152.dll
-     Creating library C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-8152.lib and object C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-8152.exp
-  [6/6] Link UE4Editor-GameEnginePlugin-8152.dll
-     Creating library C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-8152.lib and object C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-8152.exp
-  Total build time: 40.70 seconds
+﻿  Compiling game modules for hot reload
+  Target is up to date

@@ -5,12 +5,15 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#ifndef AI_PLUGIN_AIComponent_generated_h
-	#include "Public/AIComponent.h"
+#ifndef AI_PLUGIN_BTTargetPointSelection_generated_h
+	#include "Public/BTTargetPointSelection.h"
 #endif
 #ifndef AI_PLUGIN_MyAICharacter_generated_h
 	#include "Public/MyAICharacter.h"
 #endif
-#ifndef AI_PLUGIN_MyPluginComponent_generated_h
-	#include "Public/MyPluginComponent.h"
+#ifndef AI_PLUGIN_MyAIController_generated_h
+	#include "Public/MyAIController.h"
+#endif
+#ifndef AI_PLUGIN_MyTargetPoint_generated_h
+	#include "Public/MyTargetPoint.h"
 #endif
