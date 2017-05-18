@@ -12,7 +12,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #define AI_PLUGIN_TypeClass_generated_h
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_TypeClass_h
+#define CURRENT_FILE_ID UE4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_TypeClass_h
 
 
 #define FOREACH_ENUM_EBOTBEHAVIORTYPE(op) \

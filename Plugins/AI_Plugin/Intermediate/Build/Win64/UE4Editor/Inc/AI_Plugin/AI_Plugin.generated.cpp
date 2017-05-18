@@ -26,36 +26,35 @@ static class UEnum* EBotBehaviorType_StaticEnum()
 	return Singleton;
 }
 static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBehaviorType_StaticEnum, TEXT("/Script/AI_Plugin"), TEXT("EBotBehaviorType"), false, nullptr, nullptr);
-	void AMyAICharacter::StaticRegisterNativesAMyAICharacter()
-	{
-	}
-	IMPLEMENT_CLASS(AMyAICharacter, 2331644400);
-	void AMyAIController::StaticRegisterNativesAMyAIController()
-	{
-	}
-	IMPLEMENT_CLASS(AMyAIController, 2521659544);
 	void AMyTargetPoint::StaticRegisterNativesAMyTargetPoint()
 	{
 	}
 	IMPLEMENT_CLASS(AMyTargetPoint, 3066406667);
+	void AMyAICharacter::StaticRegisterNativesAMyAICharacter()
+	{
+	}
+	IMPLEMENT_CLASS(AMyAICharacter, 3651975755);
+	void AMyAIController::StaticRegisterNativesAMyAIController()
+	{
+	}
+	IMPLEMENT_CLASS(AMyAIController, 2521659544);
 #if USE_COMPILED_IN_NATIVES
 // Cross Module References
 	AIMODULE_API class UClass* Z_Construct_UClass_UBTTaskNode();
+	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
-	ENGINE_API class UClass* Z_Construct_UClass_AActor_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_AAIController();
-	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint();
 
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection();
 	AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAICharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAICharacter();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAIController_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAIController();
-	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
-	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
 	AI_PLUGIN_API class UPackage* Z_Construct_UPackage__Script_AI_Plugin();
 	UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister()
 	{
@@ -116,6 +115,37 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 		return ReturnEnum;
 	}
 	uint32 Get_Z_Construct_UEnum_AI_Plugin_EBotBehaviorType_CRC() { return 2106275065U; }
+	UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister()
+	{
+		return AMyTargetPoint::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AMyTargetPoint()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_ATargetPoint();
+			Z_Construct_UPackage__Script_AI_Plugin();
+			OuterClass = AMyTargetPoint::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("MyTargetPoint.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/MyTargetPoint.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyTargetPoint(Z_Construct_UClass_AMyTargetPoint, &AMyTargetPoint::StaticClass, TEXT("AMyTargetPoint"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyTargetPoint);
 	UClass* Z_Construct_UClass_AMyAICharacter_NoRegister()
 	{
 		return AMyAICharacter::StaticClass();
@@ -136,8 +166,8 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_EnemyState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnemyState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(EnemyState, AMyAICharacter), 0x0010000000000005, Z_Construct_UEnum_AI_Plugin_EBotBehaviorType());
-				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AMyAICharacter), 0x0010000000010001);
-				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AActor_NoRegister());
+				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AMyAICharacter), 0x0010000000000005);
+				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AMyTargetPoint_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AMyAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
@@ -198,37 +228,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyAIController(Z_Construct_UClass_AMyAIController, &AMyAIController::StaticClass, TEXT("AMyAIController"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyAIController);
-	UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister()
-	{
-		return AMyTargetPoint::StaticClass();
-	}
-	UClass* Z_Construct_UClass_AMyTargetPoint()
-	{
-		static UClass* OuterClass = NULL;
-		if (!OuterClass)
-		{
-			Z_Construct_UClass_ATargetPoint();
-			Z_Construct_UPackage__Script_AI_Plugin();
-			OuterClass = AMyTargetPoint::StaticClass();
-			if (!(OuterClass->ClassFlags & CLASS_Constructed))
-			{
-				UObjectForceRegistration(OuterClass);
-				OuterClass->ClassFlags |= 0x20800080;
-
-
-				OuterClass->StaticLink();
-#if WITH_METADATA
-				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
-				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("MyTargetPoint.h"));
-				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/MyTargetPoint.h"));
-#endif
-			}
-		}
-		check(OuterClass->GetClass());
-		return OuterClass;
-	}
-	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyTargetPoint(Z_Construct_UClass_AMyTargetPoint, &AMyTargetPoint::StaticClass, TEXT("AMyTargetPoint"), false, nullptr, nullptr, nullptr);
-	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyTargetPoint);
 	UPackage* Z_Construct_UPackage__Script_AI_Plugin()
 	{
 		static UPackage* ReturnPackage = NULL;
@@ -237,8 +236,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x9E278B1D;
-			Guid.B = 0xBC8BCC72;
+			Guid.A = 0xB586E106;
+			Guid.B = 0xF27285A4;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

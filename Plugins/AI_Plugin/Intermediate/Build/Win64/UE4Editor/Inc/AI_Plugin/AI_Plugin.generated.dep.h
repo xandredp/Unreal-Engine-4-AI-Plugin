@@ -11,12 +11,12 @@
 #ifndef AI_PLUGIN_TypeClass_generated_h
 	#include "Public/TypeClass.h"
 #endif
+#ifndef AI_PLUGIN_MyTargetPoint_generated_h
+	#include "Public/MyTargetPoint.h"
+#endif
 #ifndef AI_PLUGIN_MyAICharacter_generated_h
 	#include "Public/MyAICharacter.h"
 #endif
 #ifndef AI_PLUGIN_MyAIController_generated_h
 	#include "Public/MyAIController.h"
-#endif
-#ifndef AI_PLUGIN_MyTargetPoint_generated_h
-	#include "Public/MyTargetPoint.h"
 #endif

@@ -10,7 +10,7 @@ UCLASS()
 class AMyTargetPoint : public ATargetPoint
 {
 	GENERATED_BODY()
-	
+
 	
 	
 	

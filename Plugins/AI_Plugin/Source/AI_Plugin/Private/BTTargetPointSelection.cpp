@@ -17,29 +17,40 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 	// if the controller is valid 
 	// 1. get blackboard component, and current point
 	// 2. search for the next point thats different from the current one
+	//if (AIChar)
+	//{
+	//	UBlackboardComponent* BlackboardComp = AICon->GetBlackboardComp();
+	//	AMyTargetPoint* CurrentPoint = Cast<AMyTargetPoint>(BlackboardComp->GetValueAsObject("LocationToGo"));
+
+	//	TArray<AMyTargetPoint*> AvailableTargetPoints = AIChar->GetAvailableTargetPoints();
+
+	//	AMyTargetPoint* NextTargetPoint = nullptr;
+	//	
+	//	// Index to find next patrol point
+	//	int32 RandomIndex;
+	//	
+	//	do
+	//	{
+	//		RandomIndex = FMath::RandRange(0, AvailableTargetPoints.Num() - 1);
+	//		//Remember that the Array provided by the Controller function contains AActor* objects so we need to cast.
+	//		NextTargetPoint = Cast<AMyTargetPoint>(AvailableTargetPoints[RandomIndex]);
+	//	} while (CurrentPoint == NextTargetPoint);
+
+	//	// Udpate the next location in the blackboard 
+	//	BlackboardComp->SetValueAsObject("LocationToGo", NextTargetPoint);
+	//}
+
 	if (AIChar)
 	{
 		UBlackboardComponent* BlackboardComp = AICon->GetBlackboardComp();
-		AMyTargetPoint* CurrentPoint = Cast<AMyTargetPoint>(BlackboardComp->GetValueAsObject("LocationToGo"));
-
-		TArray<AActor*> AvailableTargetPoints = AIChar->GetAvailableTargetPoints();
-
-		AMyTargetPoint* NextTargetPoint = nullptr;
-		
-		// Index to find next patrol point
-		int32 RandomIndex;
-		
-		do
-		{
-			RandomIndex = FMath::RandRange(0, AvailableTargetPoints.Num() - 1);
-			//Remember that the Array provided by the Controller function contains AActor* objects so we need to cast.
-			NextTargetPoint = Cast<AMyTargetPoint>(AvailableTargetPoints[RandomIndex]);
-		} while (CurrentPoint == NextTargetPoint);
-
-		// Udpate the next location in the blackboard 
+		TArray<AMyTargetPoint*> AvailableTargetPoints = AIChar->GetAvailableTargetPoints();
+		AMyTargetPoint* NextTargetPoint = Cast<AMyTargetPoint>(AvailableTargetPoints[0]);
 		BlackboardComp->SetValueAsObject("LocationToGo", NextTargetPoint);
 
 		return EBTNodeResult::Succeeded;
 	}
+
+		
+	
 	return EBTNodeResult::Failed;
 }

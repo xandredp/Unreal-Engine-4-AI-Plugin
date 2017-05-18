@@ -2,6 +2,7 @@
 
 #pragma once
 #include "TypeClass.h"
+#include "MyTargetPoint.h"
 #include "AI_Plugin/Private/AI_PluginPrivatePCH.h"
 #include "MyAICharacter.generated.h"
 
@@ -14,11 +15,12 @@ public:
 	// Sets default values for this character's properties
 	AMyAICharacter();
 
+
 	UPROPERTY(EditAnywhere, Category = "AI")
 		class UBehaviorTree* BehaviorTree;
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		TArray<AActor*> PatrolTargetPoints;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		TArray<AMyTargetPoint*> PatrolTargetPoints;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		EBotBehaviorType EnemyState;
@@ -32,6 +34,6 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	FORCEINLINE TArray<AActor*> GetAvailableTargetPoints() const { return PatrolTargetPoints; }
+	FORCEINLINE TArray<AMyTargetPoint*> GetAvailableTargetPoints() const { return PatrolTargetPoints; }
 	
 };
