@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-
+#include "TypeClass.h"
 #include "AI_Plugin/Private/AI_PluginPrivatePCH.h"
 #include "MyAICharacter.generated.h"
 
@@ -19,6 +19,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		TArray<AActor*> PatrolTargetPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		EBotBehaviorType EnemyState;
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

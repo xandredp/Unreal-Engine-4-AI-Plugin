@@ -14,10 +14,22 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 	{
 	}
 	IMPLEMENT_CLASS(UBTTargetPointSelection, 1408550424);
+static class UEnum* EBotBehaviorType_StaticEnum()
+{
+	extern AI_PLUGIN_API class UPackage* Z_Construct_UPackage__Script_AI_Plugin();
+	static class UEnum* Singleton = NULL;
+	if (!Singleton)
+	{
+		extern AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
+		Singleton = GetStaticEnum(Z_Construct_UEnum_AI_Plugin_EBotBehaviorType, Z_Construct_UPackage__Script_AI_Plugin(), TEXT("EBotBehaviorType"));
+	}
+	return Singleton;
+}
+static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBehaviorType_StaticEnum, TEXT("/Script/AI_Plugin"), TEXT("EBotBehaviorType"), false, nullptr, nullptr);
 	void AMyAICharacter::StaticRegisterNativesAMyAICharacter()
 	{
 	}
-	IMPLEMENT_CLASS(AMyAICharacter, 1202183269);
+	IMPLEMENT_CLASS(AMyAICharacter, 2331644400);
 	void AMyAIController::StaticRegisterNativesAMyAIController()
 	{
 	}
@@ -37,6 +49,7 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection();
+	AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAICharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAICharacter();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyAIController_NoRegister();
@@ -75,6 +88,34 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_UBTTargetPointSelection(Z_Construct_UClass_UBTTargetPointSelection, &UBTTargetPointSelection::StaticClass, TEXT("UBTTargetPointSelection"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(UBTTargetPointSelection);
+	UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType()
+	{
+		UPackage* Outer=Z_Construct_UPackage__Script_AI_Plugin();
+		extern uint32 Get_Z_Construct_UEnum_AI_Plugin_EBotBehaviorType_CRC();
+		static UEnum* ReturnEnum = FindExistingEnumIfHotReloadOrDynamic(Outer, TEXT("EBotBehaviorType"), 0, Get_Z_Construct_UEnum_AI_Plugin_EBotBehaviorType_CRC(), false);
+		if (!ReturnEnum)
+		{
+			ReturnEnum = new(EC_InternalUseOnlyConstructor, Outer, TEXT("EBotBehaviorType"), RF_Public|RF_Transient|RF_MarkAsNative) UEnum(FObjectInitializer());
+			TArray<TPair<FName, uint8>> EnumNames;
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EBotBehaviorType::Neutral")), 0));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EBotBehaviorType::Suspicious")), 1));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EBotBehaviorType::Agression")), 2));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EBotBehaviorType::Flee")), 3));
+			EnumNames.Add(TPairInitializer<FName, uint8>(FName(TEXT("EBotBehaviorType::EBotBehaviorType_MAX")), 4));
+			ReturnEnum->SetEnums(EnumNames, UEnum::ECppForm::EnumClass);
+			ReturnEnum->CppType = TEXT("EBotBehaviorType");
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnEnum->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnEnum, TEXT("Agression.ToolTip"), TEXT("Running towards the player and attacking"));
+			MetaData->SetValue(ReturnEnum, TEXT("Flee.ToolTip"), TEXT("Flee."));
+			MetaData->SetValue(ReturnEnum, TEXT("ModuleRelativePath"), TEXT("Public/TypeClass.h"));
+			MetaData->SetValue(ReturnEnum, TEXT("Neutral.ToolTip"), TEXT("passive patrolling mode"));
+			MetaData->SetValue(ReturnEnum, TEXT("Suspicious.ToolTip"), TEXT("hearing or seeing someone."));
+#endif
+		}
+		return ReturnEnum;
+	}
+	uint32 Get_Z_Construct_UEnum_AI_Plugin_EBotBehaviorType_CRC() { return 2106275065U; }
 	UClass* Z_Construct_UClass_AMyAICharacter_NoRegister()
 	{
 		return AMyAICharacter::StaticClass();
@@ -94,6 +135,7 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_EnemyState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("EnemyState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(EnemyState, AMyAICharacter), 0x0010000000000005, Z_Construct_UEnum_AI_Plugin_EBotBehaviorType());
 				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AMyAICharacter), 0x0010000000010001);
 				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AActor_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AMyAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
@@ -104,6 +146,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("MyAICharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
+				MetaData->SetValue(NewProp_EnemyState, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_EnemyState, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
 				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("ModuleRelativePath"), TEXT("Public/MyAICharacter.h"));
 				MetaData->SetValue(NewProp_BehaviorTree, TEXT("Category"), TEXT("AI"));
@@ -193,8 +237,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000040);
 			FGuid Guid;
-			Guid.A = 0x09F720F6;
-			Guid.B = 0xFB26EF24;
+			Guid.A = 0x9E278B1D;
+			Guid.B = 0xBC8BCC72;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -8,6 +8,9 @@
 #ifndef AI_PLUGIN_BTTargetPointSelection_generated_h
 	#include "Public/BTTargetPointSelection.h"
 #endif
+#ifndef AI_PLUGIN_TypeClass_generated_h
+	#include "Public/TypeClass.h"
+#endif
 #ifndef AI_PLUGIN_MyAICharacter_generated_h
 	#include "Public/MyAICharacter.h"
 #endif

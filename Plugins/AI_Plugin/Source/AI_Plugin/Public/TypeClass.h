@@ -3,6 +3,22 @@
 #pragma once
 
 #include "AI_Plugin/Private/AI_PluginPrivatePCH.h"
+#include "TypeClass.generated.h"
+
+
+UENUM()
+enum class EBotBehaviorType : uint8
+{
+	// passive patrolling mode
+	Neutral,
+	//hearing or seeing someone. 
+	Suspicious,
+	//Running towards the player and attacking
+	Agression,
+	//Flee.
+	Flee,
+};
+
 
 /**
  * 
