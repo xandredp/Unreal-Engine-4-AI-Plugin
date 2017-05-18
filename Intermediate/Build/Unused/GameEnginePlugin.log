@@ -1,13 +1,17 @@
-﻿  Creating makefile for hot reloading GameEnginePluginEditor (modules to compile have changed)
+﻿  Creating makefile for hot reloading GameEnginePluginEditor (changes to target files)
   Compiling game modules for hot reload
   Parsing headers for GameEnginePluginEditor
-    Running UnrealHeaderTool "C:\Users\Owner\Documents\Github\UE4 AI Plugin\GameEnginePlugin.uproject" "C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-  Reflection code generated for GameEnginePluginEditor in 7.306593 seconds
-  Performing 3 actions (4 in parallel)
+    Running UnrealHeaderTool "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\GameEnginePlugin.uproject" "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+  Reflection code generated for GameEnginePluginEditor in 7.0195504 seconds
+  Performing 5 actions (4 in parallel)
   Module.AI_Plugin.cpp
+  TestChar.cpp
   AI_Plugin.generated.cpp
-C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\MyAIController.cpp(22): warning C4458: declaration of 'Pawn' hides class member
-  C:\Program Files (x86)\Epic Games\4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(40): note: see declaration of 'AController::Pawn'
-  [3/3] Link UE4Editor-AI_Plugin-9084.dll
-     Creating library C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-9084.lib and object C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-9084.exp
-  Total build time: 51.76 seconds
+D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\MyAIController.cpp(22): warning C4458: declaration of 'Pawn' hides class member
+  C:\apps\Epic Games\4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(40): note: see declaration of 'AController::Pawn'
+  [4/5] Link UE4Editor-AI_Plugin-1231.dll
+     Creating library D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-1231.lib and object D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-1231.exp
+  [5/5] Link UE4Editor-GameEnginePlugin-1231.dll
+     Creating library D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-1231.lib and object D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-1231.exp
+  Failed to write FlatCPPIncludeDependencyCache: Access to the path 'C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor' is denied.
+  Total build time: 87.06 seconds
