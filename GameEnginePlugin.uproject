@@ -9,7 +9,8 @@
 			"Type": "Runtime",
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
-				"Engine"
+				"Engine",
+				"AI_Plugin"
 			]
 		}
 	],
@@ -20,6 +21,6 @@
 		}
 	],
 	"AdditionalPluginDirectories": [
-		"/../../../../../../../../GameEnginePlugin/Plugins"
+		"/../../../../../../../../../../../GameEnginePlugin/Plugins"
 	]
 }

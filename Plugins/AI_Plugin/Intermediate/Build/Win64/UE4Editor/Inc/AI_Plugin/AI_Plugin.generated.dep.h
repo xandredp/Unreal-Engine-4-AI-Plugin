@@ -5,18 +5,21 @@
 	DO NOT modify this manually! Edit the corresponding .h files instead!
 ===========================================================================*/
 
-#ifndef AI_PLUGIN_BTTargetPointSelection_generated_h
-	#include "Public/BTTargetPointSelection.h"
-#endif
 #ifndef AI_PLUGIN_TypeClass_generated_h
 	#include "Public/TypeClass.h"
 #endif
 #ifndef AI_PLUGIN_MyTargetPoint_generated_h
 	#include "Public/MyTargetPoint.h"
 #endif
-#ifndef AI_PLUGIN_MyAICharacter_generated_h
-	#include "Public/MyAICharacter.h"
+#ifndef AI_PLUGIN_BaseCharacter_generated_h
+	#include "Public/BaseCharacter.h"
 #endif
-#ifndef AI_PLUGIN_MyAIController_generated_h
-	#include "Public/MyAIController.h"
+#ifndef AI_PLUGIN_AICharacter_generated_h
+	#include "Public/AICharacter.h"
+#endif
+#ifndef AI_PLUGIN_AICharacterController_generated_h
+	#include "Public/AICharacterController.h"
+#endif
+#ifndef AI_PLUGIN_BTTargetPointSelection_generated_h
+	#include "Public/BTTargetPointSelection.h"
 #endif

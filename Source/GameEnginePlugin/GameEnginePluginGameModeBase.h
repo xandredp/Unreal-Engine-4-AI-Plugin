@@ -12,8 +12,8 @@ UCLASS()
 class GAMEENGINEPLUGIN_API AGameEnginePluginGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
-	
-	
-	
+
+public:
+			AGameEnginePluginGameModeBase();
 	
 };

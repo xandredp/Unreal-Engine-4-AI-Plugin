@@ -4,53 +4,91 @@
 #include "AI_Plugin.h"
 #include "BTTargetPointSelection.h"
 
-#include "MyAICharacter.h"
+#include "AICharacterController.h"
+#include "AICharacter.h"
 #include "MyTargetPoint.h"
-#include "MyAIController.h"
+
+
+/* AI Module includes */
+#include "BehaviorTree/BehaviorTreeComponent.h"
 #include "BehaviorTree/BlackboardComponent.h"
+#include "BehaviorTree/Blackboard/BlackboardKeyAllTypes.h"
+
 
 EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	AMyAIController* AICon = Cast<AMyAIController>(OwnerComp.GetAIOwner());
-	AMyAICharacter* AIChar = Cast<AMyAICharacter>(OwnerComp.GetAIOwner());
+	AAICharacterController* MyController = Cast<AAICharacterController>(OwnerComp.GetAIOwner());
+	AAICharacter* MyAICharacter = Cast<AAICharacter>(OwnerComp.GetAIOwner());
 
-	// if the controller is valid 
-	// 1. get blackboard component, and current point
-	// 2. search for the next point thats different from the current one
-	//if (AIChar)
-	//{
-	//	UBlackboardComponent* BlackboardComp = AICon->GetBlackboardComp();
-	//	AMyTargetPoint* CurrentPoint = Cast<AMyTargetPoint>(BlackboardComp->GetValueAsObject("LocationToGo"));
+	MyAICharacter->AIState = EBotBehaviorType::Neutral;
+	MyController->SetBlackboardBotState(MyAICharacter->AIState);
+	//if characterisvalid
+	//1. Get the Set patrol points in Character-> TArray<AMyTargetPoint*> PatrolTargetPoints
 
-	//	TArray<AMyTargetPoint*> AvailableTargetPoints = AIChar->GetAvailableTargetPoints();
-
-	//	AMyTargetPoint* NextTargetPoint = nullptr;
-	//	
-	//	// Index to find next patrol point
-	//	int32 RandomIndex;
-	//	
-	//	do
-	//	{
-	//		RandomIndex = FMath::RandRange(0, AvailableTargetPoints.Num() - 1);
-	//		//Remember that the Array provided by the Controller function contains AActor* objects so we need to cast.
-	//		NextTargetPoint = Cast<AMyTargetPoint>(AvailableTargetPoints[RandomIndex]);
-	//	} while (CurrentPoint == NextTargetPoint);
-
-	//	// Udpate the next location in the blackboard 
-	//	BlackboardComp->SetValueAsObject("LocationToGo", NextTargetPoint);
-	//}
-
-	if (AIChar)
+	if(MyAICharacter)
 	{
-		UBlackboardComponent* BlackboardComp = AICon->GetBlackboardComp();
-		TArray<AMyTargetPoint*> AvailableTargetPoints = AIChar->GetAvailableTargetPoints();
-		AMyTargetPoint* NextTargetPoint = Cast<AMyTargetPoint>(AvailableTargetPoints[0]);
-		BlackboardComp->SetValueAsObject("LocationToGo", NextTargetPoint);
+		//2. Get variables
+		UBlackboardComponent* BlackboardComp = MyController->GetBlackboardComp();
+		TArray<AMyTargetPoint*> AvailableTargetPoints = MyAICharacter->PatrolTargetPoints;
+
+		AMyTargetPoint* CurrentTargetPoint = MyController->GetCurrentWaypoint();
+		AMyTargetPoint* NextTargetPoint = MyController->GetNextWaypoint();
+		bool bIsPositionSet = false;
+		// 3. Check Current Target Points and set the direction 
+		// if points up is true climb up the array if false climb down the array
+		
+		if (CurrentTargetPoint == nullptr)
+		{
+			int32 RandomIndex = FMath::RandRange(0, AvailableTargetPoints.Num() - 1);
+			NextTargetPoint = AvailableTargetPoints[RandomIndex];
+		}
+		//if Current Position is End position
+		else if (CurrentTargetPoint == AvailableTargetPoints[AvailableTargetPoints.Num() - 1])
+		{
+			MyAICharacter->bIsFollwingTargetPointsUp = false;
+		}
+		else if (CurrentTargetPoint == AvailableTargetPoints[0])
+		{
+			MyAICharacter->bIsFollwingTargetPointsUp = true;
+		}
+		else if (CurrentTargetPoint == NextTargetPoint)
+		{
+			//if Direction is decided
+			if (MyAICharacter->bIsFollwingTargetPointsUp == true)
+			{
+				for (int i = 0; i < AvailableTargetPoints.Num() - 1; i++)
+				{
+					if (CurrentTargetPoint == AvailableTargetPoints[i])
+					{
+						NextTargetPoint = AvailableTargetPoints[i - 1];
+					}
+				}
+			}
+			else if (MyAICharacter->bIsFollwingTargetPointsUp == false)
+			{
+				for (int i = 0; i < AvailableTargetPoints.Num() - 1; i++)
+				{
+					if (CurrentTargetPoint == AvailableTargetPoints[i])
+					{
+						NextTargetPoint = AvailableTargetPoints[i + 1];
+					}
+				}
+			}
+		}
+		
+		
+		CurrentTargetPoint = NextTargetPoint;
+
+		MyController->SetCurrentWayPoint(CurrentTargetPoint);
+		MyController->SetNextWayPoint(NextTargetPoint);
 
 		return EBTNodeResult::Succeeded;
 	}
-
-		
+//	if ((MyController == nullptr) || (MyAICharacter == nullptr))
+	else
+	{
+		return EBTNodeResult::Failed;
+	}
 	
-	return EBTNodeResult::Failed;
+
 }
