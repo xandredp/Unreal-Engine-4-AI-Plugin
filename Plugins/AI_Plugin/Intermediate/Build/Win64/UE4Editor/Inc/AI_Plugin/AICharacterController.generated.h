@@ -63,7 +63,8 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAICharacterController); \
 	FORCEINLINE static uint32 __PPO__NextWaypointKeyName() { return STRUCT_OFFSET(AAICharacterController, NextWaypointKeyName); } \
 	FORCEINLINE static uint32 __PPO__TargetEnemyKeyName() { return STRUCT_OFFSET(AAICharacterController, TargetEnemyKeyName); } \
 	FORCEINLINE static uint32 __PPO__CurrentWaypointKeyName() { return STRUCT_OFFSET(AAICharacterController, CurrentWaypointKeyName); } \
-	FORCEINLINE static uint32 __PPO__BotStateKeyName() { return STRUCT_OFFSET(AAICharacterController, BotStateKeyName); }
+	FORCEINLINE static uint32 __PPO__BotStateKeyName() { return STRUCT_OFFSET(AAICharacterController, BotStateKeyName); } \
+	FORCEINLINE static uint32 __PPO__IsArrayGoingUpKeyName() { return STRUCT_OFFSET(AAICharacterController, IsArrayGoingUpKeyName); }
 
 
 #define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_13_PROLOG

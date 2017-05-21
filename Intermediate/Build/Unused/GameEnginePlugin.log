@@ -1,8 +1,3 @@
-﻿  Deleting old hot reload file: "E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Binaries\Win64\UE4Editor-AI_Plugin-7330.dll".
-  Deleting old hot reload file: "E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Binaries\Win64\UE4Editor-AI_Plugin-7330.pdb".
-  Performing 2 actions (4 in parallel)
-  [1/2] Link UE4Editor-AI_Plugin.dll
-     Creating library E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.lib and object E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.exp
-  [2/2] Link UE4Editor-GameEnginePlugin.dll
-     Creating library E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin.lib and object E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin.exp
-  Total build time: 3.11 seconds
+﻿  Creating makefile for hot reloading GameEnginePluginEditor (modules to compile have changed)
+  Compiling game modules for hot reload
+  Target is up to date

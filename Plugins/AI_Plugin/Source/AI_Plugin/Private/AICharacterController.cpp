@@ -22,6 +22,7 @@ AAICharacterController::AAICharacterController()
 	TargetEnemyKeyName = "TargetEnemy";
 	CurrentWaypointKeyName = "CurrentWayPoint";
 	BotStateKeyName = "BotState";
+	IsArrayGoingUpKeyName = "IsArrayGoingUp";
 
 
 	/* Initializes PlayerState so we can assign a team index to AI */
@@ -101,6 +102,15 @@ EBotBehaviorType AAICharacterController::BlackboardBotState()
 	return CurrentState;
 }
 
+bool AAICharacterController::GetIsArrayGoingUp()
+{
+	if (BlackboardComp)
+	{
+		return BlackboardComp->GetValueAsBool(IsArrayGoingUpKeyName);
+	}
+	return false;
+}
+
 
 void AAICharacterController::SetCurrentWayPoint(AMyTargetPoint * NewWaypoint)
 {
@@ -150,5 +160,13 @@ void AAICharacterController::SetBlackboardBotState(EBotBehaviorType NewState)
 	if (BlackboardComp)
 	{
 		BlackboardComp->SetValueAsName(BotStateKeyName, CurrentState);
+	}
+}
+
+void AAICharacterController::SetBBIsArrayGoingUp(bool NewBool)
+{
+	if (BlackboardComp)
+	{
+		BlackboardComp->SetValueAsBool(IsArrayGoingUpKeyName, NewBool);
 	}
 }

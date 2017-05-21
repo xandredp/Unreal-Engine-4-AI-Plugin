@@ -34,11 +34,11 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 276781737);
+	IMPLEMENT_CLASS(AAICharacter, 3235986418);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 	}
-	IMPLEMENT_CLASS(AAICharacterController, 1889572867);
+	IMPLEMENT_CLASS(AAICharacterController, 1659989410);
 	void UBTTargetPointSelection::StaticRegisterNativesUBTTargetPointSelection()
 	{
 	}
@@ -211,8 +211,10 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_SenseTimeOut = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SenseTimeOut"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(SenseTimeOut, AAICharacter), 0x0010000000010001);
-				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bIsFollwingTargetPointsUp, AAICharacter, bool);
-				UProperty* NewProp_bIsFollwingTargetPointsUp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bIsFollwingTargetPointsUp"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bIsFollwingTargetPointsUp, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bIsFollwingTargetPointsUp, AAICharacter), sizeof(bool), true);
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bCanSee, AAICharacter, bool);
+				UProperty* NewProp_bCanSee = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bCanSee"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bCanSee, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bCanSee, AAICharacter), sizeof(bool), true);
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bCanHear, AAICharacter, bool);
+				UProperty* NewProp_bCanHear = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bCanHear"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bCanHear, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bCanHear, AAICharacter), sizeof(bool), true);
 				UProperty* NewProp_AIState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(AIState, AAICharacter), 0x0010000000000005, Z_Construct_UEnum_AI_Plugin_EBotBehaviorType());
 				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AAICharacter), 0x0010000000000005);
 				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AMyTargetPoint_NoRegister());
@@ -229,8 +231,12 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ToolTip"), TEXT("Time-out value to clear the sensed position of the player. Should be higher than Sense interval in the PawnSense component not never miss sense ticks."));
-				MetaData->SetValue(NewProp_bIsFollwingTargetPointsUp, TEXT("Category"), TEXT("AI"));
-				MetaData->SetValue(NewProp_bIsFollwingTargetPointsUp, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_bCanSee, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_bCanSee, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_bCanSee, TEXT("ToolTip"), TEXT("Can The pawn See?"));
+				MetaData->SetValue(NewProp_bCanHear, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_bCanHear, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_bCanHear, TEXT("ToolTip"), TEXT("Can The pawn hear?"));
 				MetaData->SetValue(NewProp_AIState, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_AIState, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
@@ -267,6 +273,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_IsArrayGoingUpKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("IsArrayGoingUpKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(IsArrayGoingUpKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_BotStateKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotStateKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(BotStateKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_CurrentWaypointKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CurrentWaypointKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(CurrentWaypointKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_TargetEnemyKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TargetEnemyKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(TargetEnemyKeyName, AAICharacterController), 0x0040000000010001);
@@ -278,6 +285,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AICharacterController.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
+				MetaData->SetValue(NewProp_IsArrayGoingUpKeyName, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_IsArrayGoingUpKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_BotStateKeyName, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_BotStateKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_CurrentWaypointKeyName, TEXT("Category"), TEXT("AI"));
@@ -335,7 +344,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x2090CD3C;
+			Guid.A = 0x987497AE;
 			Guid.B = 0x11F5CAE2;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;

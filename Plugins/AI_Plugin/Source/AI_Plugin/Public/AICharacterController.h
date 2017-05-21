@@ -39,6 +39,9 @@ class AI_PLUGIN_API AAICharacterController : public AAIController
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName BotStateKeyName;
 
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName IsArrayGoingUpKeyName;
+
 public:
 	//Track what current Patrol point AI Character is at. 
 	int32 CurrentPatrolPoint;
@@ -57,12 +60,13 @@ public:
 	AMyTargetPoint* GetCurrentWaypoint();
 	AMyTargetPoint* GetNextWaypoint();
 	EBotBehaviorType BlackboardBotState();
+	bool GetIsArrayGoingUp();
 
 	void SetCurrentWayPoint(AMyTargetPoint* NewWaypoint);
 	void SetNextWayPoint(AMyTargetPoint* NewWaypoint);
 	void SetTargetEnemy(APawn* NewTarget);
 	void SetBlackboardBotState(EBotBehaviorType NewState);
-
+	void SetBBIsArrayGoingUp(bool NewBool);
 
 
 	/** Returns BehaviorComp subobject **/

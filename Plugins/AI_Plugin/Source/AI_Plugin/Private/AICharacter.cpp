@@ -17,7 +17,9 @@ AAICharacter::AAICharacter()
 	PawnSensingComp->LOSHearingThreshold = 1200;
 
 	AIState = EBotBehaviorType::Neutral;
-	bIsFollwingTargetPointsUp = true;
+
+	bCanHear = true;
+	bCanSee = true;
 }
 
 
@@ -31,12 +33,19 @@ void AAICharacter::BeginPlay()
 	{	/*SetBalckboardData*/
 		AIState = EBotBehaviorType::Neutral;
 		AIController->SetBlackboardBotState(AIState);
+		AIController->SetBBIsArrayGoingUp(true);
 	}
 
 	if (PawnSensingComp)
 	{
-		PawnSensingComp->OnSeePawn.AddDynamic(this, &AAICharacter::OnSeePlayer);
-		//	PawnSensingComp->OnHearNoise.AddDynamic(this, &AAICharacterController::OnHearNoise);
+		if (bCanSee)
+		{
+			PawnSensingComp->OnSeePawn.AddDynamic(this, &AAICharacter::OnSeePlayer);
+		}
+		if (bCanHear)
+		{
+			//	PawnSensingComp->OnHearNoise.AddDynamic(this, &AAICharacterController::OnHearNoise);
+		}
 	}
 }
 

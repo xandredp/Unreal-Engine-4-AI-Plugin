@@ -35,10 +35,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		EBotBehaviorType AIState;
 
+	/*Can The pawn hear?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-		bool bIsFollwingTargetPointsUp;
-
-
+		bool bCanHear;
+	/*Can The pawn See?*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		bool bCanSee;
 	/* Last time the player was spotted */
 	float LastSeenTime;
 

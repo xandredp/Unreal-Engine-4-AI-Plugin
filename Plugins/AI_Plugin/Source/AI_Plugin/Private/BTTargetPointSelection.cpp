@@ -20,16 +20,14 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
 	AAICharacterController* MyController = Cast<AAICharacterController>(OwnerComp.GetAIOwner());
-	AAICharacter* MyAICharacter = Cast<AAICharacter>(OwnerComp.GetAIOwner());
+	AAICharacter* MyAICharacter = Cast<AAICharacter>(OwnerComp.GetAIOwner()->GetPawn());
 
 	//if characterisvalid
 	//1. Get the Set patrol points in Character-> TArray<AMyTargetPoint*> PatrolTargetPoints
-
-	if(MyAICharacter)
+	if(MyController)
 	{
 		MyAICharacter->AIState = EBotBehaviorType::Neutral;
 		MyController->SetBlackboardBotState(MyAICharacter->AIState);
-
 
 		//2. Get variables
 		UBlackboardComponent* BlackboardComp = MyController->GetBlackboardComp();
@@ -37,44 +35,81 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 
 		AMyTargetPoint* CurrentTargetPoint = MyController->GetCurrentWaypoint();
 		AMyTargetPoint* NextTargetPoint = MyController->GetNextWaypoint();
-		bool bIsPositionSet = false;
+		bool bIsFollwingTargetPointsUp = MyController->GetIsArrayGoingUp();
 		// 3. Check Current Target Points and set the direction 
 		// if points up is true climb up the array if false climb down the array
-		
+		int intdex = AvailableTargetPoints.Num();
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(intdex));
 		if (CurrentTargetPoint == nullptr)
 		{
+			
 			int32 RandomIndex = FMath::RandRange(0, AvailableTargetPoints.Num() - 1);
 			NextTargetPoint = AvailableTargetPoints[RandomIndex];
 		}
-		////if Current Position is End position
-		//else if (CurrentTargetPoint == AvailableTargetPoints[AvailableTargetPoints.Num() - 1])
-		//{
-		//	MyAICharacter->bIsFollwingTargetPointsUp = false;
-		//}
-		//else if (CurrentTargetPoint == AvailableTargetPoints[0])
-		//{
-		//	MyAICharacter->bIsFollwingTargetPointsUp = true;
-		//}
-		//else if (CurrentTargetPoint == NextTargetPoint)
-		//{
+		//if Current Position is End position
+		else if (CurrentTargetPoint == AvailableTargetPoints[AvailableTargetPoints.Num() - 1])
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("PointsSetDown!"));
+			bIsFollwingTargetPointsUp = false;
+			MyController->SetBBIsArrayGoingUp(bIsFollwingTargetPointsUp);
+		}
+		else if (CurrentTargetPoint == AvailableTargetPoints[0])
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("PointsSetUp!"));
+			bIsFollwingTargetPointsUp = true;
+			MyController->SetBBIsArrayGoingUp(bIsFollwingTargetPointsUp);
+		}
+
+		if (AvailableTargetPoints.Num() > 1)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("Checkbiggerthan1!"));
+			for (int i = 0; i < AvailableTargetPoints.Num(); i++)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("InsideForloop!"));
+				if (CurrentTargetPoint == AvailableTargetPoints[i])
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, FString::FromInt(i));
+					if (bIsFollwingTargetPointsUp == false)
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("ComingDown!"));
+						NextTargetPoint = AvailableTargetPoints[i - 1];
+						break;
+					}
+					if (bIsFollwingTargetPointsUp == true)
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("GoingUP!"));
+						NextTargetPoint = AvailableTargetPoints[i+1];
+						break;
+					}		
+				}
+			}
+		}
+
+
 		//	//if Direction is decided
 		//	if (MyAICharacter->bIsFollwingTargetPointsUp == true)
 		//	{
-		//		for (int i = 0; i < AvailableTargetPoints.Num() - 1; i++)
-		//		{
-		//			if (CurrentTargetPoint == AvailableTargetPoints[i])
-		//			{
-		//				NextTargetPoint = AvailableTargetPoints[i - 1];
-		//			}
-		//		}
-		//	}
-		//	else if (MyAICharacter->bIsFollwingTargetPointsUp == false)
-		//	{
+		//		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("InloopTrue!"));
 		//		for (int i = 0; i < AvailableTargetPoints.Num() - 1; i++)
 		//		{
 		//			if (CurrentTargetPoint == AvailableTargetPoints[i])
 		//			{
 		//				NextTargetPoint = AvailableTargetPoints[i + 1];
+		//				break;
+		//			}
+		//		}
+		//	}
+		//	else if (MyAICharacter->bIsFollwingTargetPointsUp == false)
+		//	{
+		//		
+		//		for (int i = 0; i < AvailableTargetPoints.Num() - 1; i++)
+		//		{
+		//			if (CurrentTargetPoint == AvailableTargetPoints[i])
+		//			{
+		//				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("InloopFalse!"));
+
+		//				NextTargetPoint = AvailableTargetPoints[0];
+		//				break;
 		//			}
 		//		}
 		//	}
@@ -85,15 +120,15 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 
 		MyController->SetCurrentWayPoint(CurrentTargetPoint);
 		MyController->SetNextWayPoint(NextTargetPoint);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some Succeeded"));
+
 		return EBTNodeResult::Succeeded;
 	}
-//	if ((MyController == nullptr) || (MyAICharacter == nullptr))
+
 	else
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some Fail!"));
+
 		return EBTNodeResult::Failed;
 	}
 	
-	//return EBTNodeResult::Succeeded;
+	return EBTNodeResult::Failed;
 }
