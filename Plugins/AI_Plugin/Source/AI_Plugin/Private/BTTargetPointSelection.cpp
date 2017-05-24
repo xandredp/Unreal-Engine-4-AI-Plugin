@@ -49,35 +49,28 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 		//if Current Position is End position
 		else if (CurrentTargetPoint == AvailableTargetPoints[AvailableTargetPoints.Num() - 1])
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("PointsSetDown!"));
 			bIsFollwingTargetPointsUp = false;
 			MyController->SetBBIsArrayGoingUp(bIsFollwingTargetPointsUp);
 		}
 		else if (CurrentTargetPoint == AvailableTargetPoints[0])
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("PointsSetUp!"));
 			bIsFollwingTargetPointsUp = true;
 			MyController->SetBBIsArrayGoingUp(bIsFollwingTargetPointsUp);
 		}
 
 		if (AvailableTargetPoints.Num() > 1)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("Checkbiggerthan1!"));
 			for (int i = 0; i < AvailableTargetPoints.Num(); i++)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("InsideForloop!"));
 				if (CurrentTargetPoint == AvailableTargetPoints[i])
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, FString::FromInt(i));
 					if (bIsFollwingTargetPointsUp == false)
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("ComingDown!"));
 						NextTargetPoint = AvailableTargetPoints[i - 1];
 						break;
 					}
 					if (bIsFollwingTargetPointsUp == true)
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("GoingUP!"));
 						NextTargetPoint = AvailableTargetPoints[i+1];
 						break;
 					}		

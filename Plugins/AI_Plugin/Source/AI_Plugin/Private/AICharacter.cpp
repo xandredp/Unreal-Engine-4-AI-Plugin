@@ -20,6 +20,7 @@ AAICharacter::AAICharacter()
 
 	bCanHear = true;
 	bCanSee = true;
+	SenseTimeOut = 2.5f;
 }
 
 
@@ -47,6 +48,30 @@ void AAICharacter::BeginPlay()
 			//	PawnSensingComp->OnHearNoise.AddDynamic(this, &AAICharacterController::OnHearNoise);
 		}
 	}
+	bSensedTarget = false;
+}
+void AAICharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+
+	
+	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut)
+	{
+		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+		if (AIController)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("GoingUP!"));
+
+			bSensedTarget = false;
+			AIState = EBotBehaviorType::Neutral;
+			AIController->SetBlackboardBotState(AIState);
+			//Sensed the player
+			AIController->SetTargetEnemy(nullptr);
+		}
+
+	}
+		//&& (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
+
 }
 
 void AAICharacter::OnSeePlayer(APawn* Pawn)
@@ -63,20 +88,17 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 	{
 
 	}
+		/* Keep track of the time the player was last sensed in order to clear the target */
+		LastSeenTime = GetWorld()->GetTimeSeconds();
+		bSensedTarget = true;
 
-	/* Keep track of the time the player was last sensed in order to clear the target */
-	LastSeenTime = GetWorld()->GetTimeSeconds();
-	bSensedTarget = true;
-
-	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
-	ACharacter* SensedPawn = Cast<ACharacter>(Pawn);
-	if (AIController && SensedPawn)
-	{
-		AIState = EBotBehaviorType::Agression;
-		AIController->SetBlackboardBotState(AIState);
-		//Sensed the player
-		AIController->SetTargetEnemy(SensedPawn);
-	}
-
-	
+		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+		ACharacter* SensedPawn = Cast<ACharacter>(Pawn);
+		if (AIController && SensedPawn)
+		{
+			AIState = EBotBehaviorType::Agression;
+			AIController->SetBlackboardBotState(AIState);
+			//Sensed the player
+			AIController->SetTargetEnemy(SensedPawn);
+		}
 }

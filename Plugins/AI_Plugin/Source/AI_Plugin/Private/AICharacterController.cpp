@@ -24,7 +24,6 @@ AAICharacterController::AAICharacterController()
 	BotStateKeyName = "BotState";
 	IsArrayGoingUpKeyName = "IsArrayGoingUp";
 
-
 	/* Initializes PlayerState so we can assign a team index to AI */
 	CurrentPatrolPoint = 0;
 	bWantsPlayerState = true;

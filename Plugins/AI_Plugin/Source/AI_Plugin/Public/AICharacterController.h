@@ -68,7 +68,6 @@ public:
 	void SetBlackboardBotState(EBotBehaviorType NewState);
 	void SetBBIsArrayGoingUp(bool NewBool);
 
-
 	/** Returns BehaviorComp subobject **/
 	FORCEINLINE UBehaviorTreeComponent* GetBehaviorComp() const { return BehaviorTreeComp; }
 
