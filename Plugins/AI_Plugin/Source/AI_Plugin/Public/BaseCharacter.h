@@ -10,6 +10,9 @@ class AI_PLUGIN_API ABaseCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
+		/* Tracks noise data used by the pawn sensing component */
+		UPawnNoiseEmitterComponent* NoiseEmitterComp;
+
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();

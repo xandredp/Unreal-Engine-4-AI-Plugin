@@ -8,6 +8,7 @@
 // Sets default values
 ABaseCharacter::ABaseCharacter()
 {
+	NoiseEmitterComp = CreateDefaultSubobject<UPawnNoiseEmitterComponent>(TEXT("NoiseEmitterComp"));
 
 	Health = 100;
 	Stamina = 100;
