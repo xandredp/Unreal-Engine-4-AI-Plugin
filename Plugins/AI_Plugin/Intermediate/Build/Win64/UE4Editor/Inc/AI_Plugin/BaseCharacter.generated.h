@@ -11,8 +11,30 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define AI_PLUGIN_BaseCharacter_generated_h
 
-#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS
-#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS_NO_PURE_DECLS
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execMakePawnNoise) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_Loudness); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->MakePawnNoise(Z_Param_Loudness); \
+		P_NATIVE_END; \
+	}
+
+
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execMakePawnNoise) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_Loudness); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->MakePawnNoise(Z_Param_Loudness); \
+		P_NATIVE_END; \
+	}
+
+
 #define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesABaseCharacter(); \

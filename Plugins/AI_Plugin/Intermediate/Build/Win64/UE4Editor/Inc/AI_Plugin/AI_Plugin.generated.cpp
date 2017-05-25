@@ -28,14 +28,15 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	IMPLEMENT_CLASS(AMyTargetPoint, 3066406667);
 	void ABaseCharacter::StaticRegisterNativesABaseCharacter()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(ABaseCharacter::StaticClass(), "MakePawnNoise",(Native)&ABaseCharacter::execMakePawnNoise);
 	}
-	IMPLEMENT_CLASS(ABaseCharacter, 2785981814);
+	IMPLEMENT_CLASS(ABaseCharacter, 2726908478);
 	void AAICharacter::StaticRegisterNativesAAICharacter()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 1355573529);
+	IMPLEMENT_CLASS(AAICharacter, 4154677619);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 	}
@@ -58,6 +59,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
+	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise();
@@ -128,6 +130,29 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyTargetPoint(Z_Construct_UClass_AMyTargetPoint, &AMyTargetPoint::StaticClass, TEXT("AMyTargetPoint"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyTargetPoint);
+	UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise()
+	{
+		struct BaseCharacter_eventMakePawnNoise_Parms
+		{
+			float Loudness;
+		};
+		UObject* Outer=Z_Construct_UClass_ABaseCharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("MakePawnNoise"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(BaseCharacter_eventMakePawnNoise_Parms));
+			UProperty* NewProp_Loudness = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Loudness"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Loudness, BaseCharacter_eventMakePawnNoise_Parms), 0x0010000000000080);
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("AI"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
+			MetaData->SetValue(ReturnFunction, TEXT("ToolTip"), TEXT("MakeNoise hook to trigger AI noise emitting (Loudness between 0.0-1.0)"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_ABaseCharacter_NoRegister()
 	{
 		return ABaseCharacter::StaticClass();
@@ -145,6 +170,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20900080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_ABaseCharacter_MakePawnNoise());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bIsAlive, ABaseCharacter, bool);
@@ -152,6 +178,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_Stamina = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Stamina"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Stamina, ABaseCharacter), 0x0010000000010001);
 				UProperty* NewProp_Health = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Health"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Health, ABaseCharacter), 0x0010000000010001);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ABaseCharacter_MakePawnNoise(), "MakePawnNoise"); // 3616896967
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -375,8 +402,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x9A3876DB;
-			Guid.B = 0xD7CAC835;
+			Guid.A = 0xBB076870;
+			Guid.B = 0x894DFFF2;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -26,7 +26,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	
+	/* MakeNoise hook to trigger AI noise emitting (Loudness between 0.0-1.0)  */
+	UFUNCTION(BlueprintCallable, Category = "AI")
+		void MakePawnNoise(float Loudness);
+
+
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float Health;

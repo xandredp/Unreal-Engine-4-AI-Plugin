@@ -38,3 +38,12 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 }
 
+
+void ABaseCharacter::MakePawnNoise(float Loudness)
+{
+	/* Make noise to be picked up by PawnSensingComponent by the enemy pawns */
+	MakeNoise(Loudness, this, GetActorLocation());
+
+	//LastNoiseLoudness = Loudness;
+	//LastMakeNoiseTime = GetWorld()->GetTimeSeconds();
+}
