@@ -32,9 +32,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	IMPLEMENT_CLASS(ABaseCharacter, 2785981814);
 	void AAICharacter::StaticRegisterNativesAAICharacter()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 3235986418);
+	IMPLEMENT_CLASS(AAICharacter, 1355573529);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 	}
@@ -47,6 +48,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
+	COREUOBJECT_API class UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API class UClass* Z_Construct_UClass_APawn_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UPawnSensingComponent_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
@@ -58,6 +60,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter();
+	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnSeePlayer();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter();
@@ -169,6 +172,32 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ABaseCharacter(Z_Construct_UClass_ABaseCharacter, &ABaseCharacter::StaticClass, TEXT("ABaseCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ABaseCharacter);
+	UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise()
+	{
+		struct AICharacter_eventOnHearNoise_Parms
+		{
+			APawn* PawnInstigator;
+			FVector Location;
+			float Volume;
+		};
+		UObject* Outer=Z_Construct_UClass_AAICharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("OnHearNoise"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x00C20401, 65535, sizeof(AICharacter_eventOnHearNoise_Parms));
+			UProperty* NewProp_Volume = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Volume"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Volume, AICharacter_eventOnHearNoise_Parms), 0x0010000000000080);
+			UProperty* NewProp_Location = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("Location"), RF_Public|RF_Transient|RF_MarkAsNative) UStructProperty(CPP_PROPERTY_BASE(Location, AICharacter_eventOnHearNoise_Parms), 0x0010000008000182, Z_Construct_UScriptStruct_FVector());
+			UProperty* NewProp_PawnInstigator = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("PawnInstigator"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PawnInstigator, AICharacter_eventOnHearNoise_Parms), 0x0010000000000080, Z_Construct_UClass_APawn_NoRegister());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+			MetaData->SetValue(NewProp_Location, TEXT("NativeConst"), TEXT(""));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UFunction* Z_Construct_UFunction_AAICharacter_OnSeePlayer()
 	{
 		struct AICharacter_eventOnSeePlayer_Parms
@@ -207,6 +236,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20900080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnHearNoise());
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnSeePlayer());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
@@ -221,6 +251,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_PawnSensingComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PawnSensingComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PawnSensingComp, AAICharacter), 0x00100000000a0009, Z_Construct_UClass_UPawnSensingComponent_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnHearNoise(), "OnHearNoise"); // 1130803556
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnSeePlayer(), "OnSeePlayer"); // 3798450267
 				OuterClass->StaticLink();
 #if WITH_METADATA
@@ -344,8 +375,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x987497AE;
-			Guid.B = 0x11F5CAE2;
+			Guid.A = 0x9A3876DB;
+			Guid.B = 0xD7CAC835;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

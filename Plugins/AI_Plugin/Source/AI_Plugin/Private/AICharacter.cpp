@@ -45,22 +45,22 @@ void AAICharacter::BeginPlay()
 		}
 		if (bCanHear)
 		{
-			//	PawnSensingComp->OnHearNoise.AddDynamic(this, &AAICharacterController::OnHearNoise);
+				PawnSensingComp->OnHearNoise.AddDynamic(this, &AAICharacter::OnHearNoise);
 		}
 	}
 	bSensedTarget = false;
 }
+
+
 void AAICharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
-	
-	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut)
+	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut && (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
 	{
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		if (AIController)
 		{
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("GoingUP!"));
 
 			bSensedTarget = false;
 			AIState = EBotBehaviorType::Neutral;
@@ -70,8 +70,6 @@ void AAICharacter::Tick(float DeltaSeconds)
 		}
 
 	}
-		//&& (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
-
 }
 
 void AAICharacter::OnSeePlayer(APawn* Pawn)
@@ -80,8 +78,8 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 	
 	if (Health <= 0.0)
 	{
-		return;
 		bIsAlive = false;
+		return;
 	}
 
 	if (!bSensedTarget)
@@ -101,4 +99,30 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 			//Sensed the player
 			AIController->SetTargetEnemy(SensedPawn);
 		}
+}
+
+void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume)
+{
+	if (Health <= 0.0)
+	{
+		bIsAlive = false;
+		return;
+	}
+	if (!bSensedTarget)
+	{
+	
+	}
+
+	
+	bSensedTarget = true;
+	LastHeardTime = GetWorld()->GetTimeSeconds();
+
+	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+
+	if (AIController)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI Hearing!"));
+
+		AIController->SetTargetEnemy(PawnInstigator);
+	}
 }

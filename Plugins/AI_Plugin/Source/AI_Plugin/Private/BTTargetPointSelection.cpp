@@ -18,7 +18,6 @@
 
 EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Some debug message!"));
 	AAICharacterController* MyController = Cast<AAICharacterController>(OwnerComp.GetAIOwner());
 	AAICharacter* MyAICharacter = Cast<AAICharacter>(OwnerComp.GetAIOwner()->GetPawn());
 
@@ -39,7 +38,7 @@ EBTNodeResult::Type UBTTargetPointSelection::ExecuteTask(UBehaviorTreeComponent&
 		// 3. Check Current Target Points and set the direction 
 		// if points up is true climb up the array if false climb down the array
 		int intdex = AvailableTargetPoints.Num();
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::FromInt(intdex));
+
 		if (CurrentTargetPoint == nullptr)
 		{
 			

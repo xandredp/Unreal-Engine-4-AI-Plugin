@@ -1,0 +1,7 @@
+﻿  Creating makefile for hot reloading GameEnginePluginEditor (modules to compile have changed)
+  Compiling game modules for hot reload
+  Performing 2 actions (4 in parallel)
+  Module.AI_Plugin.cpp
+  [2/2] Link UE4Editor-AI_Plugin-4437.dll
+     Creating library E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-4437.lib and object E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-4437.exp
+  Total build time: 31.12 seconds

@@ -60,5 +60,8 @@ public:
 
 	UFUNCTION()
 		void OnSeePlayer(APawn* Pawn);
+
+	UFUNCTION()
+		void OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume);
 	
 };
