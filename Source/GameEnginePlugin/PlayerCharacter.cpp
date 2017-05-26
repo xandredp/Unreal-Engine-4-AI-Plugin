@@ -130,6 +130,8 @@ void APlayerCharacter::MoveRight(float Value)
 
 void APlayerCharacter::OnAttack()
 {
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("MakesomeNoise!"));
+
 	MakePawnNoise(1.0f);
 }
 
