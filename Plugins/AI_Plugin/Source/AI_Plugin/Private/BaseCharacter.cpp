@@ -47,3 +47,8 @@ void ABaseCharacter::MakePawnNoise(float Loudness)
 	//LastNoiseLoudness = Loudness;
 	//LastMakeNoiseTime = GetWorld()->GetTimeSeconds();
 }
+
+void ABaseCharacter::MakePawnUnDetected(float UnDetectedVal)
+{
+
+}

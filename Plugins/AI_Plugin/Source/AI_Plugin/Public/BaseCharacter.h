@@ -30,7 +30,14 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "AI")
 		void MakePawnNoise(float Loudness);
 
+	UFUNCTION(BlueprintCallable, Category = "AI")
+		void MakePawnUnDetected(float UnDetectedVal)
 
+	UPROPERTY(EditDefaultsOnly, Category = "Condition")
+		float TimeTakenToBeSeen;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Condition")
+		float CurrentTimeTakenToSee;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float Health;
