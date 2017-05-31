@@ -20,7 +20,9 @@ AAICharacter::AAICharacter()
 
 	bCanHear = true;
 	bCanSee = true;
-	SenseTimeOut = 2.5f;
+	SenseTimeOut = 2.5;
+	DetectionMaxTime = 10.0f;
+	bFirstTimeSeen = true;
 }
 
 
@@ -58,6 +60,15 @@ void AAICharacter::Tick(float DeltaSeconds)
 
 	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut && (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
 	{
+		float a = GetWorld()->TimeSeconds - LastSeenTime;
+		float b = SenseTimeOut;
+
+		FString TheFloatStr = FString::SanitizeFloat(a);
+		FString TheFloatStr1 = FString::SanitizeFloat(b);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("UNDETECTED"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		if (AIController)
 		{
@@ -67,14 +78,20 @@ void AAICharacter::Tick(float DeltaSeconds)
 			AIController->SetBlackboardBotState(AIState);
 			//Sensed the player
 			AIController->SetTargetEnemy(nullptr);
+			//resetvariableTo use in  OnseePlayer
+			bFirstTimeSeen = true;
 		}
 
 	}
 }
 
 void AAICharacter::OnSeePlayer(APawn* Pawn)
-{
-
+{	
+	if (bFirstTimeSeen == true)
+	{
+		FirstSeenTime = GetWorld()->GetTimeSeconds();
+		bFirstTimeSeen = false;
+	}
 	
 	if (Health <= 0.0)
 	{
@@ -91,13 +108,31 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 		bSensedTarget = true;
 
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
-		ACharacter* SensedPawn = Cast<ACharacter>(Pawn);
+		ABaseCharacter* SensedPawn = Cast<ABaseCharacter>(Pawn);
+
+
 		if (AIController && SensedPawn)
 		{
-			AIState = EBotBehaviorType::Agression;
-			AIController->SetBlackboardBotState(AIState);
-			//Sensed the player
-			AIController->SetTargetEnemy(SensedPawn);
+			FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
+			FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SEEN"));
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+			//delays the  time to assign the target
+			if (LastSeenTime - FirstSeenTime > SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime)
+			{
+				FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
+				FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Following"));
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+
+				AIState = EBotBehaviorType::Agression;
+				AIController->SetBlackboardBotState(AIState);
+				//Sensed the player
+				AIController->SetTargetEnemy(SensedPawn);
+			}
+			
 		}
 }
 

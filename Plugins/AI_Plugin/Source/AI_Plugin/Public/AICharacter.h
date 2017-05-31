@@ -50,8 +50,19 @@ public:
 
 	/* Last time we attacked something */
 	float LastMeleeAttackTime;
+	/* Bool to get time LastSeenTime - FirstSeenTime (during thhis period) to get the SeenTime 
+	This is used to detect how hard it is to detect the player*/
+	float FirstSeenTime;
 
-	/* Time-out value to clear the sensed position of the player. Should be higher than Sense interval in the PawnSense component not never miss sense ticks. */
+	/* Bool to Check in Onseeplayer */
+	bool bFirstTimeSeen;
+
+	/* Maximum Timetaken to detect player This decides how fast enemy is Seen */
+	float DetectionMaxTime;
+
+	/* Time-out value to clear the sensed position of the player. 
+	Should be higher than Sense interval in the PawnSense component not never miss sense ticks. 
+	Once detectected duration of this much will be following the player*/
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		float SenseTimeOut;
 

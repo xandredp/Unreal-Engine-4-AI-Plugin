@@ -26,15 +26,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	/* MakeNoise hook to trigger AI noise emitting (Loudness between 0.0-1.0)  */
-	UFUNCTION(BlueprintCallable, Category = "AI")
-		void MakePawnNoise(float Loudness);
 
-	UFUNCTION(BlueprintCallable, Category = "AI")
-		void MakePawnUnDetected(float UnDetectedVal)
-
-	UPROPERTY(EditDefaultsOnly, Category = "Condition")
-		float TimeTakenToBeSeen;
+public :
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float CurrentTimeTakenToSee;
@@ -47,5 +40,13 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		bool bIsAlive;
-	
+
+	/* MakeNoise hook to trigger AI noise emitting (Loudness between 0.0-1.0)  */
+	UFUNCTION(BlueprintCallable, Category = "AI")
+		void MakePawnNoise(float Loudness);
+
+	/*This value is used in Enemy to detect the player 1.0 will take longer and 0.0 will be immediate detection formular
+	PawnSeenValue * DetectionMaxTime*/
+	UPROPERTY(EditDefaultsOnly, Category = "Condition")
+		float ValToMakePawnUnDetected;
 };

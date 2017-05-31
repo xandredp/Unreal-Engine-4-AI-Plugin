@@ -13,6 +13,7 @@ ABaseCharacter::ABaseCharacter()
 	Health = 100;
 	Stamina = 100;
 	bIsAlive = true;
+	ValToMakePawnUnDetected = 0.0;
 
 
 }
@@ -46,9 +47,4 @@ void ABaseCharacter::MakePawnNoise(float Loudness)
 
 	//LastNoiseLoudness = Loudness;
 	//LastMakeNoiseTime = GetWorld()->GetTimeSeconds();
-}
-
-void ABaseCharacter::MakePawnUnDetected(float UnDetectedVal)
-{
-
 }
