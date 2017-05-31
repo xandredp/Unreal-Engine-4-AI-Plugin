@@ -13,6 +13,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 #define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execMakePawnUnDetected) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_UnDetectedVal); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->MakePawnUnDetected(Z_Param_UnDetectedVal); \
+		P_NATIVE_END; \
+	} \
+ \
 	DECLARE_FUNCTION(execMakePawnNoise) \
 	{ \
 		P_GET_PROPERTY(UFloatProperty,Z_Param_Loudness); \
@@ -24,6 +33,15 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 
 #define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_BaseCharacter_h_11_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execMakePawnUnDetected) \
+	{ \
+		P_GET_PROPERTY(UFloatProperty,Z_Param_UnDetectedVal); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->MakePawnUnDetected(Z_Param_UnDetectedVal); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execMakePawnNoise) \
 	{ \
