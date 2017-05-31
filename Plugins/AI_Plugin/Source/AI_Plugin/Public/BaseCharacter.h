@@ -31,7 +31,7 @@ public:
 		void MakePawnNoise(float Loudness);
 
 	UFUNCTION(BlueprintCallable, Category = "AI")
-		void MakePawnUnDetected(float UnDetectedVal)
+		void MakePawnUnDetected(float UnDetectedVal);
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float TimeTakenToBeSeen;

@@ -1,8 +1,2 @@
-﻿  Compiling game modules for hot reload
-  Performing 3 actions (4 in parallel)
-  [1/3] Link UE4Editor-AI_Plugin-257.dll
-  PlayerCharacter.cpp
-     Creating library E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-257.lib and object E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-257.exp
-  [3/3] Link UE4Editor-GameEnginePlugin-4185.dll
-     Creating library E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-4185.lib and object E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-4185.exp
-  Total build time: 57.07 seconds
+﻿  Creating makefile for GameEnginePluginEditor (.uproject file is newer)
+  Target is up to date

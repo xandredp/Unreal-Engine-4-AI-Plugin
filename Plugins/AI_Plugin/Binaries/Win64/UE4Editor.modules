@@ -1,7 +1,6 @@
 {
-	"Changelist" : 3249277,
-	"CompatibleChangelist" : 3195953,
-	"BuildId" : "",
+	"Changelist" : 0,
+	"BuildId" : "1c3295bf-98a5-458f-8369-f9f7a1ad225e",
 	"Modules" : 
 	{
 		"AI_Plugin" : "UE4Editor-AI_Plugin.dll"
