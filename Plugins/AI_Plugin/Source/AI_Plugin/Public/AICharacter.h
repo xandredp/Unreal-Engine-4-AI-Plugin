@@ -2,6 +2,7 @@
 
 #pragma once
 
+
 #include "TypeClass.h"
 #include "MyTargetPoint.h"
 #include "Perception/PawnSensingComponent.h"
@@ -39,9 +40,11 @@ public:
 	/*Can The pawn hear?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool bCanHear;
+
 	/*Can The pawn See?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool bCanSee;
+
 	/* Last time the player was spotted */
 	float LastSeenTime;
 

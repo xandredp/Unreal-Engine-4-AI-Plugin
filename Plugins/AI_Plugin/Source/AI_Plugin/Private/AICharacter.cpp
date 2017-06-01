@@ -83,6 +83,35 @@ void AAICharacter::Tick(float DeltaSeconds)
 		}
 
 	}
+
+	if (bCanHear)
+	{
+		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+		ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+
+		if (PlayerCharacter && AIController)
+		{
+			// Define the parameters
+			FCollisionQueryParams TraceParams = FCollisionQueryParams(FName(TEXT("Trace")), true, this);
+			TraceParams.bTraceComplex = true;
+			TraceParams.bTraceAsyncScene = true;
+			TraceParams.bReturnPhysicalMaterial = true;
+
+			// Re-Initialize hit info
+			FHitResult Hit(ForceInit);
+
+			// Define start point of the trace
+			FVector Start = PlayerCharacter->GetActorLocation();
+			
+			// Define end point of the trace
+			APawn* AIPawn = AIController->GetControlledPawn();
+			FVector End = AIPawn->GetActorLocation();
+
+			// The line trace function
+			GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Pawn, TraceParams);
+			DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Red, true, 0.05f, 0.0f, 2.0f);
+		}
+	}
 }
 
 void AAICharacter::OnSeePlayer(APawn* Pawn)

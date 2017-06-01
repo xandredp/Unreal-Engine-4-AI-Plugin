@@ -29,15 +29,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	void ABaseCharacter::StaticRegisterNativesABaseCharacter()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(ABaseCharacter::StaticClass(), "MakePawnNoise",(Native)&ABaseCharacter::execMakePawnNoise);
-		FNativeFunctionRegistrar::RegisterFunction(ABaseCharacter::StaticClass(), "MakePawnUnDetected",(Native)&ABaseCharacter::execMakePawnUnDetected);
 	}
-	IMPLEMENT_CLASS(ABaseCharacter, 263008243);
+	IMPLEMENT_CLASS(ABaseCharacter, 615161751);
 	void AAICharacter::StaticRegisterNativesAAICharacter()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 2631253040);
+	IMPLEMENT_CLASS(AAICharacter, 1527330194);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 	}
@@ -61,7 +60,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise();
-	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnUnDetected();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise();
@@ -155,28 +153,6 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 		}
 		return ReturnFunction;
 	}
-	UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnUnDetected()
-	{
-		struct BaseCharacter_eventMakePawnUnDetected_Parms
-		{
-			float UnDetectedVal;
-		};
-		UObject* Outer=Z_Construct_UClass_ABaseCharacter();
-		static UFunction* ReturnFunction = NULL;
-		if (!ReturnFunction)
-		{
-			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("MakePawnUnDetected"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(BaseCharacter_eventMakePawnUnDetected_Parms));
-			UProperty* NewProp_UnDetectedVal = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("UnDetectedVal"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(UnDetectedVal, BaseCharacter_eventMakePawnUnDetected_Parms), 0x0010000000000080);
-			ReturnFunction->Bind();
-			ReturnFunction->StaticLink();
-#if WITH_METADATA
-			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("AI"));
-			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
-#endif
-		}
-		return ReturnFunction;
-	}
 	UClass* Z_Construct_UClass_ABaseCharacter_NoRegister()
 	{
 		return ABaseCharacter::StaticClass();
@@ -195,24 +171,25 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 				OuterClass->ClassFlags |= 0x20900080;
 
 				OuterClass->LinkChild(Z_Construct_UFunction_ABaseCharacter_MakePawnNoise());
-				OuterClass->LinkChild(Z_Construct_UFunction_ABaseCharacter_MakePawnUnDetected());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_ValToMakePawnUnDetected = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("ValToMakePawnUnDetected"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(ValToMakePawnUnDetected, ABaseCharacter), 0x0010000000010001);
 				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bIsAlive, ABaseCharacter, bool);
 				UProperty* NewProp_bIsAlive = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bIsAlive"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bIsAlive, ABaseCharacter), 0x0010000000010001, CPP_BOOL_PROPERTY_BITMASK(bIsAlive, ABaseCharacter), sizeof(bool), true);
 				UProperty* NewProp_Stamina = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Stamina"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Stamina, ABaseCharacter), 0x0010000000010001);
 				UProperty* NewProp_Health = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("Health"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(Health, ABaseCharacter), 0x0010000000010001);
 				UProperty* NewProp_CurrentTimeTakenToSee = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CurrentTimeTakenToSee"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(CurrentTimeTakenToSee, ABaseCharacter), 0x0010000000010001);
-				UProperty* NewProp_TimeTakenToBeSeen = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TimeTakenToBeSeen"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(TimeTakenToBeSeen, ABaseCharacter), 0x0010000000010001);
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ABaseCharacter_MakePawnNoise(), "MakePawnNoise"); // 3616896967
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_ABaseCharacter_MakePawnUnDetected(), "MakePawnUnDetected"); // 1083853826
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("BaseCharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
+				MetaData->SetValue(NewProp_ValToMakePawnUnDetected, TEXT("Category"), TEXT("Condition"));
+				MetaData->SetValue(NewProp_ValToMakePawnUnDetected, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
+				MetaData->SetValue(NewProp_ValToMakePawnUnDetected, TEXT("ToolTip"), TEXT("This value is used in Enemy to detect the player 1.0 will take longer and 0.0 will be immediate detection formular\n       PawnSeenValue * DetectionMaxTime"));
 				MetaData->SetValue(NewProp_bIsAlive, TEXT("Category"), TEXT("Condition"));
 				MetaData->SetValue(NewProp_bIsAlive, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
 				MetaData->SetValue(NewProp_Stamina, TEXT("Category"), TEXT("Condition"));
@@ -221,8 +198,6 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_Health, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
 				MetaData->SetValue(NewProp_CurrentTimeTakenToSee, TEXT("Category"), TEXT("Condition"));
 				MetaData->SetValue(NewProp_CurrentTimeTakenToSee, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
-				MetaData->SetValue(NewProp_TimeTakenToBeSeen, TEXT("Category"), TEXT("Condition"));
-				MetaData->SetValue(NewProp_TimeTakenToBeSeen, TEXT("ModuleRelativePath"), TEXT("Public/BaseCharacter.h"));
 #endif
 			}
 		}
@@ -320,7 +295,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
-				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ToolTip"), TEXT("Time-out value to clear the sensed position of the player. Should be higher than Sense interval in the PawnSense component not never miss sense ticks."));
+				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ToolTip"), TEXT("Time-out value to clear the sensed position of the player.\n      Should be higher than Sense interval in the PawnSense component not never miss sense ticks.\n      Once detectected duration of this much will be following the player"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("ToolTip"), TEXT("Can The pawn See?"));
@@ -434,8 +409,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x56797E92;
-			Guid.B = 0xEADA1AD3;
+			Guid.A = 0x9093C763;
+			Guid.B = 0x894DFFF2;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);
