@@ -3,29 +3,8 @@
   Creating makefile for hot reloading GameEnginePluginEditor (no existing makefile)
   Compiling game modules for hot reload
   Performing full C++ include scan (no include cache file)
-  Parsing headers for GameEnginePluginEditor
-    Running UnrealHeaderTool "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\GameEnginePlugin.uproject" "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-  Reflection code generated for GameEnginePluginEditor in 6.2078433 seconds
-  Performing 13 actions (4 in parallel)
-  [4/13] Resource PCLaunch.rc
-  Module.AI_Plugin.cpp
-  AI_Plugin.generated.cpp
-  PCH.GameEnginePlugin.h.cpp
-  [5/13] Resource ModuleVersionResource.rc.inl
-  [6/13] Resource PCLaunch.rc
-  [7/13] Resource ModuleVersionResource.rc.inl
-D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(107): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  C:\apps\Epic Games\4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
-D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(153): warning C4456: declaration of 'TheFloatStr' hides previous local declaration
-  D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(145): note: see declaration of 'TheFloatStr'
-D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(154): warning C4456: declaration of 'TheFloatStr1' hides previous local declaration
-  D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(146): note: see declaration of 'TheFloatStr1'
-  [8/13] Link UE4Editor-AI_Plugin-7867.dll
-     Creating library D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-7867.lib and object D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-7867.exp
-  PlayerCharacter.cpp
-  GameEnginePlugin.cpp
-  GameEnginePlugin.generated.cpp
-  GameEnginePluginGameModeBase.cpp
-  [13/13] Link UE4Editor-GameEnginePlugin-7867.dll
-     Creating library D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-7867.lib and object D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-7867.exp
-  Total build time: 57.56 seconds
+EXEC : error : All source files in module "AI_Plugin" must include the same precompiled header first.  Currently "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AI_PluginPrivatePCH.h" is included by most of the source files.  The following source files are not including "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AI_PluginPrivatePCH.h" as their first include:
+  
+  D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\ActorAudioOcclusionComponent.cpp (including D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Public\AI_Plugin.h)
+  
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.MakeFile.Targets(46,5): error MSB3073: The command ""C:\apps\Epic Games\4.14\Engine\Build\BatchFiles\Rebuild.bat" GameEnginePluginEditor Win64 Development "D:\Users\Xandre.plo6323\Desktop\UE4 AI Plugin\GameEnginePlugin.uproject" -waitmutex" exited with code -1.

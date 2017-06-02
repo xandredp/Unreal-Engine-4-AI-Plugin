@@ -84,6 +84,7 @@ void AAICharacter::Tick(float DeltaSeconds)
 
 	}
 
+	
 	if (bCanHear)
 	{
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
