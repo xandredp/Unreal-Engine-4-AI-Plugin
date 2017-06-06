@@ -11,10 +11,8 @@
 	"MarketplaceURL": "",
 	"SupportURL": "",
 	"CanContainContent": true,
-	"IsBetaVersion": false,
-  "Installed": true,
-  "EnabledByDefault": true,
-
+	"IsBetaVersion": true,
+	"Installed": true,
 	"Modules": [
 		{
 			"Name": "AI_Plugin",

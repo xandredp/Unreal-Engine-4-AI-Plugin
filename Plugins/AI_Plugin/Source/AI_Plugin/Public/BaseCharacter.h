@@ -13,6 +13,7 @@ class AI_PLUGIN_API ABaseCharacter : public ACharacter
 		/* Tracks noise data used by the pawn sensing component */
 		UPawnNoiseEmitterComponent* NoiseEmitterComp;
 
+
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
@@ -28,6 +29,9 @@ public:
 
 
 public :
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+		class UArrowComponent* ArrowComp;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float CurrentTimeTakenToSee;
