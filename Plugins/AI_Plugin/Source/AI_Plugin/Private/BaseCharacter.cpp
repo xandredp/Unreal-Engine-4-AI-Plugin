@@ -9,8 +9,9 @@
 ABaseCharacter::ABaseCharacter()
 {
 	NoiseEmitterComp = CreateDefaultSubobject<UPawnNoiseEmitterComponent>(TEXT("NoiseEmitterComp"));
+
 	ArrowComp = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComp"));
-	ArrowComp->SetupAttachment(GetMesh());
+
 	Health = 100;
 	Stamina = 100;
 	bIsAlive = true;
