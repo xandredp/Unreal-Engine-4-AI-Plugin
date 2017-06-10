@@ -11,10 +11,10 @@ AAICharacter::AAICharacter()
 {
 
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
-	PawnSensingComp->SetPeripheralVisionAngle(60.0f);
-	PawnSensingComp->SightRadius = 2000;
+	PawnSensingComp->SetPeripheralVisionAngle(20.0f);
+	PawnSensingComp->SightRadius = 500;
 	PawnSensingComp->HearingThreshold = 600;
-	PawnSensingComp->LOSHearingThreshold = 1200;
+	PawnSensingComp->LOSHearingThreshold = 600;
 
 	AIState = EBotBehaviorType::Neutral;
 
@@ -57,6 +57,8 @@ void AAICharacter::BeginPlay()
 void AAICharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
+
+
 
 	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut && (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
 	{
@@ -104,13 +106,31 @@ void AAICharacter::Tick(float DeltaSeconds)
 			// Define start point of the trace
 			FVector Start = PlayerCharacter->GetActorLocation();
 			
+			//getplayercontrol->WasInputKeyJustPressed(EKeys::B)
+
 			// Define end point of the trace
 			APawn* AIPawn = AIController->GetControlledPawn();
 			FVector End = AIPawn->GetActorLocation();
 
+			UCapsuleComponent* bob = this->GetCapsuleComponent();
+			FVector CapStart = bob->GetComponentLocation();
+			
+
+
+			FString TheFloatStr = FString::SanitizeFloat(CapStart.X);
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, "Capsule X=" + TheFloatStr);
+
+			FRotator Rot = AIPawn->GetViewRotation();
+			
+			FVector ForwardVec = AIPawn->GetActorForwardVector();
+			
+
 			// The line trace function
 			GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Pawn, TraceParams);
 			DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Red, true, 0.05f, 0.0f, 2.0f);
+
+			DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265/180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 2.0);
+			DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 0.2);
 		}
 	}
 }
