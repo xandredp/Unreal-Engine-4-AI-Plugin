@@ -167,6 +167,8 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 		ABaseCharacter* SensedPawn = Cast<ABaseCharacter>(Pawn);
 		APawn* ThisAIPawn = AIController->GetControlledPawn();
 
+
+
 		if (AIController && SensedPawn)
 		{
 			FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
@@ -179,11 +181,18 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 			AIController->SetBlackboardBotState(AIState);
 			AIController->SetTargetEnemy(SensedPawn);
 
+			UCapsuleComponent* bob = this->GetCapsuleComponent();
+			FVector ThisAILocation= bob->GetComponentLocation();
+
 			if (YellForHelpOnContact)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I see the bastard - Form up on me you guys"));
-				for (TActorIterator<AAICharacterController> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+				for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 				{
+					ActorItr->GetController()->GetName();
+			
+					AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
+
 					if (ActorItr->GetName() == AIController->GetName()) 
 					{
 						//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
@@ -191,19 +200,44 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 					}
 					else
 					{			
-						// Dont override any "heling" that is already happening - this should stop a crazy swarm of dumbos from forming
+						// Dont override any "helping" that is already happening - this should stop a crazy swarm of dumbos from forming
 
-						if (ActorItr->GetAIState() == EBotBehaviorType::Helping)
+						if (AIController2->GetAIState() == EBotBehaviorType::Helping)
 						{
 							// This AI is already Helping so skip
 						}
 						else
 						{
-							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
-							AIState = EBotBehaviorType::Helping;
-							ActorItr->SetBlackboardBotState(AIState);
-							// Set the others to target my AI position
-							ActorItr->SetLeaderToHelp(ThisAIPawn);
+							// Make sure the yell for help only works for a limited range
+
+						    FVector	ThisLocation = AIController2->GetCharacter()->GetActorLocation();
+
+							float Length = (ThisLocation - ThisAILocation).Size();
+
+							// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the listening AI LOSHearingThreshold
+							
+							float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
+							if (DebugDrawEnabled)
+							{
+								GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hearing test for " + ActorItr->GetName() + " : MaxHearingRange=" + FString::SanitizeFloat(MaxHearingRange) + " Length=" + FString::SanitizeFloat(Length));
+							}
+							if (Length > MaxHearingRange)
+							{
+								// Yelled but this AI is too far away to hear us
+								if (DebugDrawEnabled)
+								{
+									GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName() + " Too far to here me yell");
+								}
+							}
+							else
+							{
+								//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
+								AIState = EBotBehaviorType::Helping;
+								AIController2->SetBlackboardBotState(AIState);
+								// Set the others to target my AI position
+								AIController2->SetLeaderToHelp(ThisAIPawn);
+							}
+
 						}
 					}
 				}
