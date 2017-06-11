@@ -11,10 +11,10 @@ AAICharacter::AAICharacter()
 {
 
 	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
-	PawnSensingComp->SetPeripheralVisionAngle(20.0f);
-	PawnSensingComp->SightRadius = 500;
+	PawnSensingComp->SetPeripheralVisionAngle(40.0f);
+	PawnSensingComp->SightRadius = 1500;
 	PawnSensingComp->HearingThreshold = 600;
-	PawnSensingComp->LOSHearingThreshold = 600;
+	PawnSensingComp->LOSHearingThreshold = 400;
 
 	AIState = EBotBehaviorType::Neutral;
 
@@ -23,6 +23,8 @@ AAICharacter::AAICharacter()
 	SenseTimeOut = 2.5;
 	DetectionMaxTime = 10.0f;
 	bFirstTimeSeen = true;
+	DebugDrawEnabled = false;
+	YellForHelpOnContact = true;
 }
 
 
@@ -68,8 +70,8 @@ void AAICharacter::Tick(float DeltaSeconds)
 		FString TheFloatStr = FString::SanitizeFloat(a);
 		FString TheFloatStr1 = FString::SanitizeFloat(b);
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("UNDETECTED"));
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+		//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
 
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		if (AIController)
@@ -79,6 +81,7 @@ void AAICharacter::Tick(float DeltaSeconds)
 			AIState = EBotBehaviorType::Neutral;
 			AIController->SetBlackboardBotState(AIState);
 			//Sensed the player
+
 			AIController->SetTargetEnemy(nullptr);
 			//resetvariableTo use in  OnseePlayer
 			bFirstTimeSeen = true;
@@ -127,10 +130,13 @@ void AAICharacter::Tick(float DeltaSeconds)
 
 			// The line trace function
 			GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Pawn, TraceParams);
-			DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Red, true, 0.05f, 0.0f, 2.0f);
 
-			DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265/180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 2.0);
-			DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 0.2);
+			if (DebugDrawEnabled) 
+			{			
+				DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 0.2f);
+				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
+				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 0.5);
+			}
 		}
 	}
 }
@@ -159,15 +165,50 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ABaseCharacter* SensedPawn = Cast<ABaseCharacter>(Pawn);
-
+		APawn* ThisAIPawn = AIController->GetControlledPawn();
 
 		if (AIController && SensedPawn)
 		{
 			FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
 			FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SEEN"));
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+
+			AIState = EBotBehaviorType::Suspicious;
+			AIController->SetBlackboardBotState(AIState);
+			AIController->SetTargetEnemy(SensedPawn);
+
+			if (YellForHelpOnContact)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I see the bastard - Form up on me you guys"));
+				for (TActorIterator<AAICharacterController> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+				{
+					if (ActorItr->GetName() == AIController->GetName()) 
+					{
+						//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
+						// Skip me you plonker
+					}
+					else
+					{			
+						// Dont override any "heling" that is already happening - this should stop a crazy swarm of dumbos from forming
+
+						if (ActorItr->GetAIState() == EBotBehaviorType::Helping)
+						{
+							// This AI is already Helping so skip
+						}
+						else
+						{
+							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
+							AIState = EBotBehaviorType::Helping;
+							ActorItr->SetBlackboardBotState(AIState);
+							// Set the others to target my AI position
+							ActorItr->SetLeaderToHelp(ThisAIPawn);
+						}
+					}
+				}
+			}
+
 			//delays the  time to assign the target
 			if (LastSeenTime - FirstSeenTime > SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime)
 			{
@@ -184,6 +225,15 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 			}
 			
 		}
+		else
+		{
+			GLog->Log("Out of Seeing range");
+			AIState  = EBotBehaviorType::Neutral;
+			AIController->SetBlackboardBotState(AIState);
+			AIController->ResetSeenTarget();
+		}
+
+
 }
 
 void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume)

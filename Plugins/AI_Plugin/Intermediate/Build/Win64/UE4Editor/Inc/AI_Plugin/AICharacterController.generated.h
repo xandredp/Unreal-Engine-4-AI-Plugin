@@ -6,13 +6,36 @@
 ===========================================================================*/
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AMyTargetPoint;
 #ifdef AI_PLUGIN_AICharacterController_generated_h
 #error "AICharacterController.generated.h already included, missing '#pragma once' in AICharacterController.h"
 #endif
 #define AI_PLUGIN_AICharacterController_generated_h
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_RPC_WRAPPERS
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_RPC_WRAPPERS_NO_PURE_DECLS
+#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execSetCurrentWayPoint) \
+	{ \
+		P_GET_OBJECT(AMyTargetPoint,Z_Param_NewWaypoint); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->SetCurrentWayPoint(Z_Param_NewWaypoint); \
+		P_NATIVE_END; \
+	}
+
+
+#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execSetCurrentWayPoint) \
+	{ \
+		P_GET_OBJECT(AMyTargetPoint,Z_Param_NewWaypoint); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->SetCurrentWayPoint(Z_Param_NewWaypoint); \
+		P_NATIVE_END; \
+	}
+
+
 #define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesAAICharacterController(); \
@@ -60,10 +83,12 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAICharacterController); \
 
 
 #define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacterController_h_16_PRIVATE_PROPERTY_OFFSET \
+	FORCEINLINE static uint32 __PPO__LeaderToHelpKeyName() { return STRUCT_OFFSET(AAICharacterController, LeaderToHelpKeyName); } \
 	FORCEINLINE static uint32 __PPO__NextWaypointKeyName() { return STRUCT_OFFSET(AAICharacterController, NextWaypointKeyName); } \
 	FORCEINLINE static uint32 __PPO__TargetEnemyKeyName() { return STRUCT_OFFSET(AAICharacterController, TargetEnemyKeyName); } \
 	FORCEINLINE static uint32 __PPO__CurrentWaypointKeyName() { return STRUCT_OFFSET(AAICharacterController, CurrentWaypointKeyName); } \
 	FORCEINLINE static uint32 __PPO__BotStateKeyName() { return STRUCT_OFFSET(AAICharacterController, BotStateKeyName); } \
+	FORCEINLINE static uint32 __PPO__AIStateKeyName() { return STRUCT_OFFSET(AAICharacterController, AIStateKeyName); } \
 	FORCEINLINE static uint32 __PPO__IsArrayGoingUpKeyName() { return STRUCT_OFFSET(AAICharacterController, IsArrayGoingUpKeyName); }
 
 

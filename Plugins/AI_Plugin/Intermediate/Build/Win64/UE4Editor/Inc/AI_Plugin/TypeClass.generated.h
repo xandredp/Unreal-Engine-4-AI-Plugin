@@ -19,5 +19,6 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	op(EBotBehaviorType::Neutral) \
 	op(EBotBehaviorType::Suspicious) \
 	op(EBotBehaviorType::Agression) \
-	op(EBotBehaviorType::Flee) 
+	op(EBotBehaviorType::Flee) \
+	op(EBotBehaviorType::Helping) 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

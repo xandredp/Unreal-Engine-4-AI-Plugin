@@ -27,9 +27,13 @@ class AI_PLUGIN_API AAICharacterController : public AAIController
 
 	// Blackboard Keys
 
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName LeaderToHelpKeyName;
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName NextWaypointKeyName;
-	//reference to player
+
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName TargetEnemyKeyName;
 
@@ -40,7 +44,11 @@ class AI_PLUGIN_API AAICharacterController : public AAIController
 		FName BotStateKeyName;
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName AIStateKeyName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName IsArrayGoingUpKeyName;
+
 
 public:
 	//Track what current Patrol point AI Character is at. 
@@ -52,24 +60,30 @@ public:
 
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
 	virtual void Possess(class APawn* InPawn) override;
 
 	//	virtual void UnPossess() override;
 
 	AMyTargetPoint* GetCurrentWaypoint();
 	AMyTargetPoint* GetNextWaypoint();
-	EBotBehaviorType BlackboardBotState();
+
 	bool GetIsArrayGoingUp();
+
+	EBotBehaviorType GetAIState();
+	UFUNCTION(BlueprintCallable, Category = "BlackBoard")
 
 	void SetCurrentWayPoint(AMyTargetPoint* NewWaypoint);
 	void SetNextWayPoint(AMyTargetPoint* NewWaypoint);
 	void SetTargetEnemy(APawn* NewTarget);
+	void SetLeaderToHelp(APawn * NewTarget);
 	void SetBlackboardBotState(EBotBehaviorType NewState);
+
+
+
+	void ResetSeenTarget();
 	void SetBBIsArrayGoingUp(bool NewBool);
 
 	/** Returns BehaviorComp subobject **/
 	FORCEINLINE UBehaviorTreeComponent* GetBehaviorComp() const { return BehaviorTreeComp; }
-
 	FORCEINLINE UBlackboardComponent* GetBlackboardComp() const { return BlackboardComp; }
 };

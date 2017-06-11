@@ -1,11 +1,4 @@
-﻿  Performing 2 actions (4 in parallel)
-  Module.AI_Plugin.cpp
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(112): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  C:\Users\User\Documents\UE414\UnrealEngine-4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(174): warning C4456: declaration of 'TheFloatStr' hides previous local declaration
-  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(166): note: see declaration of 'TheFloatStr'
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(175): warning C4456: declaration of 'TheFloatStr1' hides previous local declaration
-  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(167): note: see declaration of 'TheFloatStr1'
-  [2/2] Link UE4Editor-AI_Plugin.dll
+﻿  Performing 1 actions (4 in parallel)
+  [1/1] Link UE4Editor-AI_Plugin.dll
      Creating library C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.lib and object C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.exp
-  Total build time: 25.77 seconds
+  Total build time: 4.21 seconds
