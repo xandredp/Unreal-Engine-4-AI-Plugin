@@ -21,8 +21,10 @@ AAICharacterController::AAICharacterController()
 	NextWaypointKeyName = "NextWayPoint";
 	TargetEnemyKeyName = "TargetEnemy";
 	CurrentWaypointKeyName = "CurrentWayPoint";
-	BotStateKeyName = "BotState";
+	//BotStateKeyName = "BotState";
+	AIStateKeyName = "AIState";
 	IsArrayGoingUpKeyName = "IsArrayGoingUp";
+	LeaderToHelpKeyName = "LeaderToHelp";
 
 	/* Initializes PlayerState so we can assign a team index to AI */
 	CurrentPatrolPoint = 0;
@@ -74,31 +76,64 @@ AMyTargetPoint * AAICharacterController::GetNextWaypoint()
 	return nullptr;
 }
 
-EBotBehaviorType AAICharacterController::BlackboardBotState()
+//EBotBehaviorType AAICharacterController::BlackboardBotState()
+//{
+//	EBotBehaviorType CurrentState = EBotBehaviorType::Neutral;
+//	if (BlackboardComp)
+//	{
+//		FName CurrentStateInBlackBoard = BlackboardComp->GetValueAsName(BotStateKeyName);
+//		if (CurrentStateInBlackBoard == "Neutral")
+//		{
+//			CurrentState = EBotBehaviorType::Neutral;
+//		}
+//		else if (CurrentStateInBlackBoard == "Suspicious")
+//		{
+//			CurrentState = EBotBehaviorType::Suspicious;
+//		}
+//		else if (CurrentStateInBlackBoard == "Flee")
+//		{
+//			CurrentState = EBotBehaviorType::Flee;
+//		}
+//		else if (CurrentStateInBlackBoard == "Agression")
+//		{
+//			CurrentState = EBotBehaviorType::Agression;
+//		}
+//		return CurrentState;
+//	}
+//	return CurrentState;
+//}
+
+
+
+void AAICharacterController::SetBlackboardBotState(EBotBehaviorType NewState)
 {
-	EBotBehaviorType CurrentState = EBotBehaviorType::Neutral;
+	FName CurrentState = "NULL";
+
+	if (NewState == EBotBehaviorType::Neutral)
+	{
+		CurrentState = "Neutral";
+	}
+	else if (NewState == EBotBehaviorType::Suspicious)
+	{
+		CurrentState = "Suspicious";
+	}
+	else if (NewState == EBotBehaviorType::Flee)
+	{
+		CurrentState = "Flee";
+	}
+	else if (NewState == EBotBehaviorType::Agression)
+	{
+		CurrentState = "Agression";
+	}
+	else if (NewState == EBotBehaviorType::Helping)
+	{
+		CurrentState = "Helping";
+	}
+
 	if (BlackboardComp)
 	{
-		FName CurrentStateInBlackBoard = BlackboardComp->GetValueAsName(BotStateKeyName);
-		if (CurrentStateInBlackBoard == "Neutral")
-		{
-			CurrentState = EBotBehaviorType::Neutral;
-		}
-		else if (CurrentStateInBlackBoard == "Suspicious")
-		{
-			CurrentState = EBotBehaviorType::Suspicious;
-		}
-		else if (CurrentStateInBlackBoard == "Flee")
-		{
-			CurrentState = EBotBehaviorType::Flee;
-		}
-		else if (CurrentStateInBlackBoard == "Agression")
-		{
-			CurrentState = EBotBehaviorType::Agression;
-		}
-		return CurrentState;
+		BlackboardComp->SetValueAsName(AIStateKeyName, CurrentState);
 	}
-	return CurrentState;
 }
 
 bool AAICharacterController::GetIsArrayGoingUp()
@@ -110,6 +145,20 @@ bool AAICharacterController::GetIsArrayGoingUp()
 	return false;
 }
 
+EBotBehaviorType AAICharacterController::GetAIState()
+{
+	EBotBehaviorType ReturnState;
+	if (BlackboardComp)
+	{
+		FString CurrentState = BlackboardComp->GetValueAsString(AIStateKeyName);
+		if (CurrentState == "Neutral") { ReturnState = EBotBehaviorType::Neutral; }
+		if (CurrentState == "Suspicious") { ReturnState = EBotBehaviorType::Neutral; }
+		if (CurrentState == "Flee") { ReturnState = EBotBehaviorType::Neutral; }
+		if (CurrentState == "Agression") { ReturnState = EBotBehaviorType::Neutral; }
+		if (CurrentState == "Helping") { ReturnState = EBotBehaviorType::Neutral; }
+	}
+	return ReturnState;
+}
 
 void AAICharacterController::SetCurrentWayPoint(AMyTargetPoint * NewWaypoint)
 {
@@ -133,34 +182,22 @@ void AAICharacterController::SetTargetEnemy(APawn * NewTarget)
 	}
 }
 
-void AAICharacterController::SetBlackboardBotState(EBotBehaviorType NewState)
+void AAICharacterController::SetLeaderToHelp(APawn * NewTarget)
 {
-	FName CurrentState = "NULL";
-
-	if (NewState == EBotBehaviorType::Neutral)
-	{
-		CurrentState = "Neutral";
-
-	}
-	else if (NewState == EBotBehaviorType::Suspicious)
-	{
-		CurrentState = "Suspicious";
-	}
-	else if (NewState == EBotBehaviorType::Flee)
-	{
-		CurrentState = "Flee";
-	}
-	else if (NewState == EBotBehaviorType::Agression)
-	{
-		CurrentState = "Agression";
-	}
-
-
 	if (BlackboardComp)
 	{
-		BlackboardComp->SetValueAsName(BotStateKeyName, CurrentState);
+		BlackboardComp->SetValueAsObject(LeaderToHelpKeyName, NewTarget);
 	}
 }
+
+void AAICharacterController::ResetSeenTarget()
+{
+	if (BlackboardComp)
+	{
+		BlackboardComp->SetValueAsObject(TargetEnemyKeyName, nullptr);
+	}
+}
+
 
 void AAICharacterController::SetBBIsArrayGoingUp(bool NewBool)
 {

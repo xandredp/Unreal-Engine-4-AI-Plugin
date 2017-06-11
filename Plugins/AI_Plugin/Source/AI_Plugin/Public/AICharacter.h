@@ -43,7 +43,14 @@ public:
 
 	/*Can The pawn See?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-		bool bCanSee;
+		bool bCanSee;	/*Can The pawn See?*/
+
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		bool YellForHelpOnContact;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		bool DebugDrawEnabled;
 
 	/* Last time the player was spotted */
 	float LastSeenTime;

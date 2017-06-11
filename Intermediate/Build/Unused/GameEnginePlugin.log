@@ -1,25 +1,14 @@
-﻿  Creating makefile for hot reloading GameEnginePluginEditor (no existing makefile)
-  Compiling game modules for hot reload
-  Performing full C++ include scan (no include cache file)
-  Parsing headers for GameEnginePluginEditor
-    Running UnrealHeaderTool "E:\love-\Projects\AI-Plugin\GameEnginePlugin.uproject" "E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
-  Reflection code generated for GameEnginePluginEditor in 6.8724591 seconds
-  Performing 9 actions (4 in parallel)
-  [4/9] Resource ModuleVersionResource.rc.inl
-  [3/9] Resource PCLaunch.rc
+﻿  Performing 2 actions (4 in parallel)
   Module.AI_Plugin.cpp
-  AI_Plugin.generated.cpp
-  GameEnginePluginGameModeBase.cpp
-  PlayerCharacter.cpp
-E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(108): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  E:\Program Files\Epic Games\UE_4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
-E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(154): warning C4456: declaration of 'TheFloatStr' hides previous local declaration
-  E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(146): note: see declaration of 'TheFloatStr'
-E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(155): warning C4456: declaration of 'TheFloatStr1' hides previous local declaration
-  E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(147): note: see declaration of 'TheFloatStr1'
-  GameEnginePlugin.generated.cpp
-  [8/9] Link UE4Editor-AI_Plugin-5387.dll
-     Creating library E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-5387.lib and object E:\love-\Projects\AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-5387.exp
-  [9/9] Link UE4Editor-GameEnginePlugin-7550.dll
-     Creating library E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-7550.lib and object E:\love-\Projects\AI-Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-7550.exp
-  Total build time: 153.75 seconds
+C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(115): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+  C:\Users\User\Documents\UE414\UnrealEngine-4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
+C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(249): warning C4456: declaration of 'TheFloatStr' hides previous local declaration
+  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(174): note: see declaration of 'TheFloatStr'
+C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(250): warning C4456: declaration of 'TheFloatStr1' hides previous local declaration
+  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(175): note: see declaration of 'TheFloatStr1'
+C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(168): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+  C:\Users\User\Documents\UE414\UnrealEngine-4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
+c:\users\user\documents\github\unreal-engine-4-ai-plugin\plugins\ai_plugin\source\ai_plugin\private\aicharactercontroller.cpp(160): warning C4701: potentially uninitialized local variable 'ReturnState' used
+  [2/2] Link UE4Editor-AI_Plugin.dll
+     Creating library C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.lib and object C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.exp
+  Total build time: 22.90 seconds

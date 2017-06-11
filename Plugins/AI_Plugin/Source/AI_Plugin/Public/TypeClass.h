@@ -17,6 +17,8 @@ enum class EBotBehaviorType : uint8
 	Agression,
 	//Flee.
 	Flee,
+	//Helping an AI
+	Helping,
 };
 
 
