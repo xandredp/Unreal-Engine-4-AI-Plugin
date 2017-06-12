@@ -30,12 +30,6 @@ public:
 
 public :
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-		class UArrowComponent* ArrowComp;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Condition")
-		float CurrentTimeTakenToSee;
-
 	UPROPERTY(EditDefaultsOnly, Category = "Condition")
 		float Health;
 
@@ -51,6 +45,6 @@ public :
 
 	/*This value is used in Enemy to detect the player 1.0 will take longer and 0.0 will be immediate detection formular
 	PawnSeenValue * DetectionMaxTime*/
-	UPROPERTY(EditDefaultsOnly, Category = "Condition")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Condition")
 		float ValToMakePawnUnDetected;
 };

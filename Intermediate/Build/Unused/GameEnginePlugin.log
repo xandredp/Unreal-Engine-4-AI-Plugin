@@ -1,14 +1,3 @@
-﻿  Performing 2 actions (4 in parallel)
-  Module.AI_Plugin.cpp
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(115): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  C:\Users\User\Documents\UE414\UnrealEngine-4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(249): warning C4456: declaration of 'TheFloatStr' hides previous local declaration
-  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(174): note: see declaration of 'TheFloatStr'
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(250): warning C4456: declaration of 'TheFloatStr1' hides previous local declaration
-  C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(175): note: see declaration of 'TheFloatStr1'
-C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(168): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
-  C:\Users\User\Documents\UE414\UnrealEngine-4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
-c:\users\user\documents\github\unreal-engine-4-ai-plugin\plugins\ai_plugin\source\ai_plugin\private\aicharactercontroller.cpp(160): warning C4701: potentially uninitialized local variable 'ReturnState' used
-  [2/2] Link UE4Editor-AI_Plugin.dll
-     Creating library C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.lib and object C:\Users\User\Documents\GitHub\Unreal-Engine-4-AI-Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin.exp
-  Total build time: 22.90 seconds
+﻿  Creating makefile for hot reloading GameEnginePluginEditor (modules to compile have changed)
+  Compiling game modules for hot reload
+  Target is up to date

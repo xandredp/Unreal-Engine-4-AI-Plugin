@@ -68,6 +68,7 @@ public:
 	bool bFirstTimeSeen;
 
 	/* Maximum Timetaken to detect player This decides how fast enemy is Seen */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	float DetectionMaxTime;
 
 	/* Time-out value to clear the sensed position of the player. 
