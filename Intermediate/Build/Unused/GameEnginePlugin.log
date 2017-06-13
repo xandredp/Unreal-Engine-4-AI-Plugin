@@ -1,3 +1,30 @@
-﻿  Creating makefile for hot reloading GameEnginePluginEditor (modules to compile have changed)
+﻿  Cleaning GameEnginePluginEditor Binaries...
   Compiling game modules for hot reload
-  Target is up to date
+  Creating makefile for hot reloading GameEnginePluginEditor (no existing makefile)
+  Compiling game modules for hot reload
+  Performing full C++ include scan (no include cache file)
+  Parsing headers for GameEnginePluginEditor
+    Running UnrealHeaderTool "C:\Users\Owner\Documents\Github\UE4 AI Plugin\GameEnginePlugin.uproject" "C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\GameEnginePluginEditor\Development\GameEnginePluginEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -installed
+  Reflection code generated for GameEnginePluginEditor in 7.331422 seconds
+  Performing 13 actions (4 in parallel)
+  [4/13] Resource PCLaunch.rc
+  Module.AI_Plugin.cpp
+  PCH.GameEnginePlugin.h.cpp
+  AI_Plugin.generated.cpp
+  [5/13] Resource ModuleVersionResource.rc.inl
+  [6/13] Resource PCLaunch.rc
+  [7/13] Resource ModuleVersionResource.rc.inl
+C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(114): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+  C:\Program Files (x86)\Epic Games\4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
+C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Source\AI_Plugin\Private\AICharacter.cpp(167): warning C4996: 'AController::GetControlledPawn': Use GetPawn() instead of GetControlledPawn() Please update your code to the new API before upgrading to the next release, otherwise your project will no longer compile.
+  C:\Program Files (x86)\Epic Games\4.14\Engine\Source\Runtime\Engine\Classes\GameFramework/Controller.h(180): note: see declaration of 'AController::GetControlledPawn'
+c:\users\owner\documents\github\ue4 ai plugin\plugins\ai_plugin\source\ai_plugin\private\aicharactercontroller.cpp(160): warning C4701: potentially uninitialized local variable 'ReturnState' used
+  [8/13] Link UE4Editor-AI_Plugin-3673.dll
+     Creating library C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-3673.lib and object C:\Users\Owner\Documents\Github\UE4 AI Plugin\Plugins\AI_Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-AI_Plugin-3673.exp
+  GameEnginePluginGameModeBase.cpp
+  GameEnginePlugin.cpp
+  PlayerCharacter.cpp
+  GameEnginePlugin.generated.cpp
+  [13/13] Link UE4Editor-GameEnginePlugin-6387.dll
+     Creating library C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-6387.lib and object C:\Users\Owner\Documents\Github\UE4 AI Plugin\Intermediate\Build\Win64\UE4Editor\Development\UE4Editor-GameEnginePlugin-6387.exp
+  Total build time: 102.73 seconds

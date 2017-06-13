@@ -13,7 +13,7 @@ void EmptyLinkFunctionForGeneratedCode1AI_Plugin() {}
 	void UActorAudioOcclusionComponent::StaticRegisterNativesUActorAudioOcclusionComponent()
 	{
 	}
-	IMPLEMENT_CLASS(UActorAudioOcclusionComponent, 471321630);
+	IMPLEMENT_CLASS(UActorAudioOcclusionComponent, 1557855819);
 static class UEnum* EBotBehaviorType_StaticEnum()
 {
 	extern AI_PLUGIN_API class UPackage* Z_Construct_UPackage__Script_AI_Plugin();
@@ -98,6 +98,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 				OuterClass->ClassFlags |= 0x20B00080;
 
 
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bShouldOccludeSound, UActorAudioOcclusionComponent, bool);
+				UProperty* NewProp_bShouldOccludeSound = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bShouldOccludeSound"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bShouldOccludeSound, UActorAudioOcclusionComponent), 0x0010000000000001, CPP_BOOL_PROPERTY_BITMASK(bShouldOccludeSound, UActorAudioOcclusionComponent), sizeof(bool), true);
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -105,6 +109,9 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 				MetaData->SetValue(OuterClass, TEXT("ClassGroupNames"), TEXT("Custom"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("ActorAudioOcclusionComponent.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/ActorAudioOcclusionComponent.h"));
+				MetaData->SetValue(NewProp_bShouldOccludeSound, TEXT("Category"), TEXT("ActorAudioOcclusionComponent"));
+				MetaData->SetValue(NewProp_bShouldOccludeSound, TEXT("ModuleRelativePath"), TEXT("Public/ActorAudioOcclusionComponent.h"));
+				MetaData->SetValue(NewProp_bShouldOccludeSound, TEXT("ToolTip"), TEXT("Should this actor block sound?"));
 #endif
 			}
 		}
@@ -492,7 +499,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x0DC6244E;
+			Guid.A = 0x4DC8D454;
 			Guid.B = 0xD9779E01;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;

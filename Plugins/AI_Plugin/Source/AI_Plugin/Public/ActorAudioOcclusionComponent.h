@@ -21,6 +21,8 @@ public:
 	// Called every frame
 	virtual void TickComponent( float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction ) override;
 
-		
+	// Should this actor block sound?
+	UPROPERTY(EditAnywhere)
+		bool bShouldOccludeSound;
 	
 };

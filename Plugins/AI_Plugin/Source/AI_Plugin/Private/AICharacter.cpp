@@ -132,9 +132,9 @@ void AAICharacter::Tick(float DeltaSeconds)
 
 			if (DebugDrawEnabled) 
 			{			
-				DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 0.2f);
+				DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 1.0f);
 				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
-				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 0.5);
+				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
 			}
 		}
 	}
