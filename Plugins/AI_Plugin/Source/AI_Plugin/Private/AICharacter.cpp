@@ -69,10 +69,12 @@ void AAICharacter::Tick(float DeltaSeconds)
 
 		FString TheFloatStr = FString::SanitizeFloat(a);
 		FString TheFloatStr1 = FString::SanitizeFloat(b);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("UNDETECTED"));
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
-
+		if (DebugDrawEnabled)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("UNDETECTED"));
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+		}
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		if (AIController)
 		{
@@ -89,8 +91,8 @@ void AAICharacter::Tick(float DeltaSeconds)
 	}
 
 	
-	if (bCanHear)
-	{
+//	if (bCanHear)
+//	{
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
@@ -136,7 +138,7 @@ void AAICharacter::Tick(float DeltaSeconds)
 				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
 				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
 			}
-		}
+//		}
 	}
 }
 
@@ -173,9 +175,12 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 			FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
 			FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected);//FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SEEN"));
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+			if (DebugDrawEnabled)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SEEN"));
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);
+			}
 
 			AIState = EBotBehaviorType::Suspicious;
 			AIController->SetBlackboardBotState(AIState);
@@ -183,7 +188,6 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 			UCapsuleComponent* bob = this->GetCapsuleComponent();
 			FVector ThisAILocation = bob->GetComponentLocation();
-
 
 			//if the last time seen is bigger than maximun duration
 			if (LastSeenTime - FirstSeenTime > SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime)
@@ -201,7 +205,10 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 				if (YellForHelpOnContact)
 				{
-					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I see the bastard - Form up on me you guys"));
+					if (DebugDrawEnabled)
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I see the bastard - Form up on me you guys"));
+					}
 					for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 					{
 						ActorItr->GetController()->GetName();
@@ -229,7 +236,7 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 								float Length = (ThisLocation - ThisAILocation).Size();
 
-								// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the listening AI LOSHearingThreshold
+								// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the Yelling AI LOSHearingThreshold
 
 								float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
 								if (DebugDrawEnabled)
@@ -261,7 +268,10 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 		}
 		else
 		{
-			GLog->Log("Out of Seeing range");
+			if (DebugDrawEnabled)
+			{
+				GLog->Log("Out of Seeing range");
+			}
 			AIState  = EBotBehaviorType::Neutral;
 			AIController->SetBlackboardBotState(AIState);
 			AIController->ResetSeenTarget();

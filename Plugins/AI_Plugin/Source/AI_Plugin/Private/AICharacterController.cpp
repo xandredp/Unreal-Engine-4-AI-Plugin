@@ -152,10 +152,10 @@ EBotBehaviorType AAICharacterController::GetAIState()
 	{
 		FString CurrentState = BlackboardComp->GetValueAsString(AIStateKeyName);
 		if (CurrentState == "Neutral") { ReturnState = EBotBehaviorType::Neutral; }
-		if (CurrentState == "Suspicious") { ReturnState = EBotBehaviorType::Neutral; }
-		if (CurrentState == "Flee") { ReturnState = EBotBehaviorType::Neutral; }
-		if (CurrentState == "Agression") { ReturnState = EBotBehaviorType::Neutral; }
-		if (CurrentState == "Helping") { ReturnState = EBotBehaviorType::Neutral; }
+		if (CurrentState == "Suspicious") { ReturnState = EBotBehaviorType::Suspicious; }
+		if (CurrentState == "Flee") { ReturnState = EBotBehaviorType::Flee; }
+		if (CurrentState == "Agression") { ReturnState = EBotBehaviorType::Agression; }
+		if (CurrentState == "Helping") { ReturnState = EBotBehaviorType::Helping; }
 	}
 	return ReturnState;
 }
