@@ -293,16 +293,86 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 	
 	}
 
+	UCapsuleComponent* bob = this->GetCapsuleComponent();
+	FVector ThisAILocation = bob->GetComponentLocation();
 	
 	bSensedTarget = true;
 	LastHeardTime = GetWorld()->GetTimeSeconds();
 
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+	APawn* ThisAIPawn = AIController->GetControlledPawn();
 
 	if (AIController)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI Hearing!"));
+		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI detected a Noise!"));
 
 		AIController->SetTargetEnemy(PawnInstigator);
+
+
+		AIState = EBotBehaviorType::Agression;
+		AIController->SetBlackboardBotState(AIState);
+
+
+		if (YellForHelpOnContact)
+		{
+			if (DebugDrawEnabled)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I heard the bastard - Form up on me you guys"));
+			}
+			for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+			{
+				ActorItr->GetController()->GetName();
+
+				AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
+
+				if (ActorItr->GetName() == AIController->GetName())
+				{
+					//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
+					// Skip me you plonker
+				}
+				else
+				{
+					// Dont override any "helping" that is already happening - this should stop a crazy swarm of dumbos from forming
+
+					if (AIController2->GetAIState() == EBotBehaviorType::Helping)
+					{
+						// This AI is already Helping so skip
+					}
+					else
+					{
+						// Make sure the yell for help only works for a limited range
+
+						FVector	ThisLocation = AIController2->GetCharacter()->GetActorLocation();
+
+						float Length = (ThisLocation - ThisAILocation).Size();
+
+						// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the Yelling AI LOSHearingThreshold
+
+						float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
+						if (DebugDrawEnabled)
+						{
+							GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hearing test for " + ActorItr->GetName() + " : MaxHearingRange=" + FString::SanitizeFloat(MaxHearingRange) + " Length=" + FString::SanitizeFloat(Length));
+						}
+						if (Length > MaxHearingRange)
+						{
+							// Yelled but this AI is too far away to hear us
+							if (DebugDrawEnabled)
+							{
+								GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName() + " Too far to here me yell");
+							}
+						}
+						else
+						{
+							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
+							AIState = EBotBehaviorType::Helping;
+							AIController2->SetBlackboardBotState(AIState);
+							// Set the others to target my AI position
+							AIController2->SetLeaderToHelp(ThisAIPawn);
+						}
+
+					}
+				}
+			}
+		}
 	}
 }
