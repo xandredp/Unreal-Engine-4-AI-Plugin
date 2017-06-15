@@ -30,6 +30,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	{
 	}
 	IMPLEMENT_CLASS(AMyTargetPoint, 3066406667);
+	void AAIFollwingPoint::StaticRegisterNativesAAIFollwingPoint()
+	{
+	}
+	IMPLEMENT_CLASS(AAIFollwingPoint, 2191055910);
 	void ABaseCharacter::StaticRegisterNativesABaseCharacter()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(ABaseCharacter::StaticClass(), "MakePawnNoise",(Native)&ABaseCharacter::execMakePawnNoise);
@@ -40,12 +44,16 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 2215575165);
+	IMPLEMENT_CLASS(AAICharacter, 315532665);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacterController::StaticClass(), "SetCurrentWayPoint",(Native)&AAICharacterController::execSetCurrentWayPoint);
 	}
-	IMPLEMENT_CLASS(AAICharacterController, 1428893897);
+	IMPLEMENT_CLASS(AAICharacterController, 4275920634);
+	void UBTFollwingBoss::StaticRegisterNativesUBTFollwingBoss()
+	{
+	}
+	IMPLEMENT_CLASS(UBTFollwingBoss, 2322684339);
 	void UBTTargetPointSelection::StaticRegisterNativesUBTTargetPointSelection()
 	{
 	}
@@ -54,10 +62,12 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 // Cross Module References
 	ENGINE_API class UClass* Z_Construct_UClass_UActorComponent();
 	ENGINE_API class UClass* Z_Construct_UClass_ATargetPoint();
+	ENGINE_API class UClass* Z_Construct_UClass_AActor();
 	ENGINE_API class UClass* Z_Construct_UClass_ACharacter();
 	COREUOBJECT_API class UScriptStruct* Z_Construct_UScriptStruct_FVector();
 	ENGINE_API class UClass* Z_Construct_UClass_APawn_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UPawnSensingComponent_NoRegister();
+	ENGINE_API class UClass* Z_Construct_UClass_USkeletalMeshComponent_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_UBehaviorTree_NoRegister();
 	AIMODULE_API class UClass* Z_Construct_UClass_AAIController();
 	AIMODULE_API class UClass* Z_Construct_UClass_UBTTaskNode();
@@ -67,6 +77,8 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAIFollwingPoint_NoRegister();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAIFollwingPoint();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter();
@@ -77,6 +89,8 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacterController_SetCurrentWayPoint();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacterController_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacterController();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTFollwingBoss_NoRegister();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTFollwingBoss();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_UBTTargetPointSelection();
 	AI_PLUGIN_API class UPackage* Z_Construct_UPackage__Script_AI_Plugin();
@@ -181,6 +195,37 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyTargetPoint(Z_Construct_UClass_AMyTargetPoint, &AMyTargetPoint::StaticClass, TEXT("AMyTargetPoint"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyTargetPoint);
+	UClass* Z_Construct_UClass_AAIFollwingPoint_NoRegister()
+	{
+		return AAIFollwingPoint::StaticClass();
+	}
+	UClass* Z_Construct_UClass_AAIFollwingPoint()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AActor();
+			Z_Construct_UPackage__Script_AI_Plugin();
+			OuterClass = AAIFollwingPoint::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20900080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AIFollwingPoint.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AIFollwingPoint.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_AAIFollwingPoint(Z_Construct_UClass_AAIFollwingPoint, &AAIFollwingPoint::StaticClass, TEXT("AAIFollwingPoint"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(AAIFollwingPoint);
 	UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise()
 	{
 		struct BaseCharacter_eventMakePawnNoise_Parms
@@ -322,6 +367,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnSeePlayer());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_AIFollowPoint = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIFollowPoint"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(AIFollowPoint, AAICharacter), 0x0010000000000005, Z_Construct_UClass_AAIFollwingPoint_NoRegister());
+				UProperty* NewProp_AIFollwingPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIFollwingPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(AIFollwingPoints, AAICharacter), 0x0010000000000005);
+				UProperty* NewProp_AIFollwingPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_AIFollwingPoints, TEXT("AIFollwingPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AAIFollwingPoint_NoRegister());
 				UProperty* NewProp_SenseTimeOut = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("SenseTimeOut"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(SenseTimeOut, AAICharacter), 0x0010000000010001);
 				UProperty* NewProp_DetectionMaxTime = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("DetectionMaxTime"), RF_Public|RF_Transient|RF_MarkAsNative) UFloatProperty(CPP_PROPERTY_BASE(DetectionMaxTime, AAICharacter), 0x0010000000000005);
 				CPP_BOOL_PROPERTY_BITMASK_STRUCT(DebugDrawEnabled, AAICharacter, bool);
@@ -332,10 +380,13 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_bCanSee = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bCanSee"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bCanSee, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bCanSee, AAICharacter), sizeof(bool), true);
 				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bCanHear, AAICharacter, bool);
 				UProperty* NewProp_bCanHear = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bCanHear"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bCanHear, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bCanHear, AAICharacter), sizeof(bool), true);
+				CPP_BOOL_PROPERTY_BITMASK_STRUCT(bisLooping, AAICharacter, bool);
+				UProperty* NewProp_bisLooping = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("bisLooping"), RF_Public|RF_Transient|RF_MarkAsNative) UBoolProperty(FObjectInitializer(), EC_CppProperty, CPP_BOOL_PROPERTY_OFFSET(bisLooping, AAICharacter), 0x0010000000000005, CPP_BOOL_PROPERTY_BITMASK(bisLooping, AAICharacter), sizeof(bool), true);
 				UProperty* NewProp_AIState = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIState"), RF_Public|RF_Transient|RF_MarkAsNative) UByteProperty(CPP_PROPERTY_BASE(AIState, AAICharacter), 0x0010000000000005, Z_Construct_UEnum_AI_Plugin_EBotBehaviorType());
 				UProperty* NewProp_PatrolTargetPoints = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UArrayProperty(CPP_PROPERTY_BASE(PatrolTargetPoints, AAICharacter), 0x0010000000000005);
 				UProperty* NewProp_PatrolTargetPoints_Inner = new(EC_InternalUseOnlyConstructor, NewProp_PatrolTargetPoints, TEXT("PatrolTargetPoints"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(FObjectInitializer(), EC_CppProperty, 0, 0x0000000000000000, Z_Construct_UClass_AMyTargetPoint_NoRegister());
 				UProperty* NewProp_PawnSensingComp = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("PawnSensingComp"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(PawnSensingComp, AAICharacter), 0x00100000000a0009, Z_Construct_UClass_UPawnSensingComponent_NoRegister());
+				UProperty* NewProp_AiMesh = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AiMesh"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(AiMesh, AAICharacter), 0x0010000000080009, Z_Construct_UClass_USkeletalMeshComponent_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnHearNoise(), "OnHearNoise"); // 1130803556
@@ -346,6 +397,11 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Navigation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AICharacter.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_AIFollowPoint, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_AIFollowPoint, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_AIFollwingPoints, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_AIFollwingPoints, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_AIFollwingPoints, TEXT("ToolTip"), TEXT("For follwing AI"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_SenseTimeOut, TEXT("ToolTip"), TEXT("Time-out value to clear the sensed position of the player.\n      Should be higher than Sense interval in the PawnSense component not never miss sense ticks.\n      Once detectected duration of this much will be following the player"));
@@ -363,6 +419,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_bCanHear, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_bCanHear, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_bCanHear, TEXT("ToolTip"), TEXT("Can The pawn hear?"));
+				MetaData->SetValue(NewProp_bisLooping, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_bisLooping, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_bisLooping, TEXT("ToolTip"), TEXT("Can The pawn hear?"));
 				MetaData->SetValue(NewProp_AIState, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_AIState, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
@@ -370,6 +429,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_PawnSensingComp, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_PawnSensingComp, TEXT("EditInline"), TEXT("true"));
 				MetaData->SetValue(NewProp_PawnSensingComp, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_AiMesh, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_AiMesh, TEXT("EditInline"), TEXT("true"));
+				MetaData->SetValue(NewProp_AiMesh, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_BehaviorTree, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_BehaviorTree, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 #endif
@@ -422,9 +484,9 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacterController_SetCurrentWayPoint());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+				UProperty* NewProp_LeaderFollwiongLocationKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("LeaderFollwiongLocationKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(LeaderFollwiongLocationKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_IsArrayGoingUpKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("IsArrayGoingUpKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(IsArrayGoingUpKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_AIStateKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIStateKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(AIStateKeyName, AAICharacterController), 0x0040000000010001);
-				UProperty* NewProp_BotStateKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BotStateKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(BotStateKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_CurrentWaypointKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("CurrentWaypointKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(CurrentWaypointKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_TargetEnemyKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("TargetEnemyKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(TargetEnemyKeyName, AAICharacterController), 0x0040000000010001);
 				UProperty* NewProp_NextWaypointKeyName = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("NextWaypointKeyName"), RF_Public|RF_Transient|RF_MarkAsNative) UNameProperty(CPP_PROPERTY_BASE(NextWaypointKeyName, AAICharacterController), 0x0040000000010001);
@@ -437,12 +499,12 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(OuterClass, TEXT("HideCategories"), TEXT("Collision Rendering Utilities|Transformation"));
 				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("AICharacterController.h"));
 				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
+				MetaData->SetValue(NewProp_LeaderFollwiongLocationKeyName, TEXT("Category"), TEXT("AI"));
+				MetaData->SetValue(NewProp_LeaderFollwiongLocationKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_IsArrayGoingUpKeyName, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_IsArrayGoingUpKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_AIStateKeyName, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_AIStateKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
-				MetaData->SetValue(NewProp_BotStateKeyName, TEXT("Category"), TEXT("AI"));
-				MetaData->SetValue(NewProp_BotStateKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_CurrentWaypointKeyName, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_CurrentWaypointKeyName, TEXT("ModuleRelativePath"), TEXT("Public/AICharacterController.h"));
 				MetaData->SetValue(NewProp_TargetEnemyKeyName, TEXT("Category"), TEXT("AI"));
@@ -460,6 +522,37 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AAICharacterController(Z_Construct_UClass_AAICharacterController, &AAICharacterController::StaticClass, TEXT("AAICharacterController"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AAICharacterController);
+	UClass* Z_Construct_UClass_UBTFollwingBoss_NoRegister()
+	{
+		return UBTFollwingBoss::StaticClass();
+	}
+	UClass* Z_Construct_UClass_UBTFollwingBoss()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_UBTTaskNode();
+			Z_Construct_UPackage__Script_AI_Plugin();
+			OuterClass = UBTFollwingBoss::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20000080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("BTFollwingBoss.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/BTFollwingBoss.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_UBTFollwingBoss(Z_Construct_UClass_UBTFollwingBoss, &UBTFollwingBoss::StaticClass, TEXT("UBTFollwingBoss"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(UBTFollwingBoss);
 	UClass* Z_Construct_UClass_UBTTargetPointSelection_NoRegister()
 	{
 		return UBTTargetPointSelection::StaticClass();
@@ -499,8 +592,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x4DC8D454;
-			Guid.B = 0xD9779E01;
+			Guid.A = 0x7C1651D1;
+			Guid.B = 0x615561AB;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

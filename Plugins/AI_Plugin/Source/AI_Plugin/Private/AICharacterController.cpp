@@ -21,10 +21,10 @@ AAICharacterController::AAICharacterController()
 	NextWaypointKeyName = "NextWayPoint";
 	TargetEnemyKeyName = "TargetEnemy";
 	CurrentWaypointKeyName = "CurrentWayPoint";
-	//BotStateKeyName = "BotState";
 	AIStateKeyName = "AIState";
 	IsArrayGoingUpKeyName = "IsArrayGoingUp";
 	LeaderToHelpKeyName = "LeaderToHelp";
+	LeaderFollwiongLocationKeyName = "LeaderFollowingPoint";
 
 	/* Initializes PlayerState so we can assign a team index to AI */
 	CurrentPatrolPoint = 0;
@@ -75,35 +75,6 @@ AMyTargetPoint * AAICharacterController::GetNextWaypoint()
 	}
 	return nullptr;
 }
-
-//EBotBehaviorType AAICharacterController::BlackboardBotState()
-//{
-//	EBotBehaviorType CurrentState = EBotBehaviorType::Neutral;
-//	if (BlackboardComp)
-//	{
-//		FName CurrentStateInBlackBoard = BlackboardComp->GetValueAsName(BotStateKeyName);
-//		if (CurrentStateInBlackBoard == "Neutral")
-//		{
-//			CurrentState = EBotBehaviorType::Neutral;
-//		}
-//		else if (CurrentStateInBlackBoard == "Suspicious")
-//		{
-//			CurrentState = EBotBehaviorType::Suspicious;
-//		}
-//		else if (CurrentStateInBlackBoard == "Flee")
-//		{
-//			CurrentState = EBotBehaviorType::Flee;
-//		}
-//		else if (CurrentStateInBlackBoard == "Agression")
-//		{
-//			CurrentState = EBotBehaviorType::Agression;
-//		}
-//		return CurrentState;
-//	}
-//	return CurrentState;
-//}
-
-
 
 void AAICharacterController::SetBlackboardBotState(EBotBehaviorType NewState)
 {
@@ -204,5 +175,14 @@ void AAICharacterController::SetBBIsArrayGoingUp(bool NewBool)
 	if (BlackboardComp)
 	{
 		BlackboardComp->SetValueAsBool(IsArrayGoingUpKeyName, NewBool);
+	}
+}
+void AAICharacterController::SetBlackboardFollwiongLocation(AAIFollwingPoint* NewFollowingPoint)
+{
+	if (BlackboardComp)
+	{
+		NewFollowingPoint->GetActorLocation();
+		BlackboardComp->SetValueAsVector(LeaderFollwiongLocationKeyName, NewFollowingPoint->GetActorLocation());
+			//SetValueAsObject(LeaderFollwiongLocationKeyName, NewFollowingPoint);
 	}
 }

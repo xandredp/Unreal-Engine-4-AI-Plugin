@@ -14,6 +14,9 @@
 #ifndef AI_PLUGIN_MyTargetPoint_generated_h
 	#include "Public/MyTargetPoint.h"
 #endif
+#ifndef AI_PLUGIN_AIFollwingPoint_generated_h
+	#include "Public/AIFollwingPoint.h"
+#endif
 #ifndef AI_PLUGIN_BaseCharacter_generated_h
 	#include "Public/BaseCharacter.h"
 #endif
@@ -22,6 +25,9 @@
 #endif
 #ifndef AI_PLUGIN_AICharacterController_generated_h
 	#include "Public/AICharacterController.h"
+#endif
+#ifndef AI_PLUGIN_BTFollwingBoss_generated_h
+	#include "Public/BTFollwingBoss.h"
 #endif
 #ifndef AI_PLUGIN_BTTargetPointSelection_generated_h
 	#include "Public/BTTargetPointSelection.h"

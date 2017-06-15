@@ -5,6 +5,7 @@
 
 #include "TypeClass.h"
 #include "MyTargetPoint.h"
+#include "AIFollwingPoint.h"
 #include "Perception/PawnSensingComponent.h"
 #include "BaseCharacter.h"
 #include "AICharacter.generated.h"
@@ -28,6 +29,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = "AI")
 		class UBehaviorTree* BehaviorTree;
 
+	UPROPERTY(EditAnywhere, Category = "AI")
+		USkeletalMeshComponent* AiMesh;
+
 	UPROPERTY(VisibleAnywhere, Category = "AI")
 		class UPawnSensingComponent* PawnSensingComp;
 
@@ -36,6 +40,10 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		EBotBehaviorType AIState;
+
+	/*Can The pawn hear?*/
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		bool bisLooping;
 
 	/*Can The pawn hear?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
@@ -79,6 +87,14 @@ public:
 
 	/* Resets after sense time-out to avoid unnecessary clearing of target each tick */
 	bool bSensedTarget;
+
+	/*For follwing AI*/
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		TArray<AAIFollwingPoint*> AIFollwingPoints;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
+		AAIFollwingPoint* AIFollowPoint;
 
 	UFUNCTION()
 		void OnSeePlayer(APawn* Pawn);

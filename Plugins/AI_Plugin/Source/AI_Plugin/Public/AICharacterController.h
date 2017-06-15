@@ -4,6 +4,7 @@
 
 #include "AICharacter.h"
 #include "MyTargetPoint.h"
+#include "AIFollwingPoint.h"
 #include "AIController.h"
 #include "AICharacterController.generated.h"
 
@@ -41,13 +42,13 @@ class AI_PLUGIN_API AAICharacterController : public AAIController
 		FName CurrentWaypointKeyName;
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		FName BotStateKeyName;
-
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName AIStateKeyName;
 
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
 		FName IsArrayGoingUpKeyName;
+
+	UPROPERTY(EditDefaultsOnly, Category = "AI")
+		FName LeaderFollwiongLocationKeyName;
 
 
 public:
@@ -77,7 +78,7 @@ public:
 	void SetTargetEnemy(APawn* NewTarget);
 	void SetLeaderToHelp(APawn * NewTarget);
 	void SetBlackboardBotState(EBotBehaviorType NewState);
-
+	void SetBlackboardFollwiongLocation(AAIFollwingPoint* NewFollowingPoint);
 
 
 	void ResetSeenTarget();

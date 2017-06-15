@@ -32,7 +32,8 @@ AAICharacter::AAICharacter()
 void AAICharacter::BeginPlay()
 {
 	Super::BeginPlay();
-
+	AiMesh = GetMesh();
+	
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 	if (AIController)
 	{	/*SetBalckboardData*/
@@ -53,6 +54,29 @@ void AAICharacter::BeginPlay()
 		}
 	}
 	bSensedTarget = false;
+
+	//The actor is going to be following
+	if (AIFollwingPoints.Num() != 0)
+	{
+
+		GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("if"));
+		//const FAttachmentTransformRules& attachmentrules(LocationRule, RotationRule, ScaleRule);
+		for (int i = 0; i < AIFollwingPoints.Num(); i++)
+		{
+			GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("for"));
+			if (AIFollwingPoints[i]->IsValidLowLevel())
+			{
+				GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("attach"));
+				AIFollwingPoints[i]->AttachToComponent(AiMesh, FAttachmentTransformRules(EAttachmentRule::KeepWorld, true));
+			}
+		}
+	}
+
+	if (AIFollowPoint)
+	{
+		AIFollowPoint->GetActorLocation();
+		AIController->SetBlackboardFollwiongLocation(AIFollowPoint);
+	}
 }
 
 
@@ -60,8 +84,10 @@ void AAICharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
 
+	
 
 
+	/*Time calculation to not set target*/
 	if (bSensedTarget && (GetWorld()->TimeSeconds - LastSeenTime) > SenseTimeOut && (GetWorld()->TimeSeconds - LastHeardTime) > SenseTimeOut)
 	{
 		float a = GetWorld()->TimeSeconds - LastSeenTime;
@@ -91,8 +117,8 @@ void AAICharacter::Tick(float DeltaSeconds)
 	}
 
 	
-//	if (bCanHear)
-//	{
+	if (bCanHear)
+	{
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
@@ -138,7 +164,7 @@ void AAICharacter::Tick(float DeltaSeconds)
 				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
 				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
 			}
-//		}
+		}
 	}
 }
 
@@ -192,11 +218,15 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 			//if the last time seen is bigger than maximun duration
 			if (LastSeenTime - FirstSeenTime > SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime)
 			{
+				if (DebugDrawEnabled)
+				{
+					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Following"));
+				}
+				
 				/*FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
 				FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Following"));
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TheFloatStr);
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Blue, TheFloatStr1);*/
+				
+				*/
 
 				AIState = EBotBehaviorType::Agression;
 				AIController->SetBlackboardBotState(AIState);
