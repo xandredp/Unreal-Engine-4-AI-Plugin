@@ -41,22 +41,23 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		EBotBehaviorType AIState;
 
-	/*Can The pawn hear?*/
+	/* CHECK THIS ?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool bisLooping;
 
-	/*Can The pawn hear?*/
+	/*Can the pawn hear?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool bCanHear;
 
 	/*Can The pawn See?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
-		bool bCanSee;	/*Can The pawn See?*/
-
-
+		bool bCanSee;	
+	
+	/* Will the pawn yell for and request others to rally to ths pawn?*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool YellForHelpOnContact;
 
+	/* Enable additional diagnostics to visualise the Pawn Sensing parameters an the game*/
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 		bool DebugDrawEnabled;
 
@@ -83,7 +84,7 @@ public:
 	Should be higher than Sense interval in the PawnSense component not never miss sense ticks. 
 	Once detectected duration of this much will be following the player*/
 	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		float SenseTimeOut;
+	float SenseTimeOut;
 
 	/* Resets after sense time-out to avoid unnecessary clearing of target each tick */
 	bool bSensedTarget;

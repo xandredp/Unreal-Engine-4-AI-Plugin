@@ -44,7 +44,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 315532665);
+	IMPLEMENT_CLASS(AAICharacter, 630955040);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacterController::StaticClass(), "SetCurrentWayPoint",(Native)&AAICharacterController::execSetCurrentWayPoint);
@@ -410,18 +410,19 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				MetaData->SetValue(NewProp_DetectionMaxTime, TEXT("ToolTip"), TEXT("Maximum Timetaken to detect player This decides how fast enemy is Seen"));
 				MetaData->SetValue(NewProp_DebugDrawEnabled, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_DebugDrawEnabled, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+				MetaData->SetValue(NewProp_DebugDrawEnabled, TEXT("ToolTip"), TEXT("Enable additional diagnostics to visualise the Pawn Sensing parameters an the game"));
 				MetaData->SetValue(NewProp_YellForHelpOnContact, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_YellForHelpOnContact, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
-				MetaData->SetValue(NewProp_YellForHelpOnContact, TEXT("ToolTip"), TEXT("Can The pawn See?"));
+				MetaData->SetValue(NewProp_YellForHelpOnContact, TEXT("ToolTip"), TEXT("Will the pawn yell for and request others to rally to ths pawn?"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_bCanSee, TEXT("ToolTip"), TEXT("Can The pawn See?"));
 				MetaData->SetValue(NewProp_bCanHear, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_bCanHear, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
-				MetaData->SetValue(NewProp_bCanHear, TEXT("ToolTip"), TEXT("Can The pawn hear?"));
+				MetaData->SetValue(NewProp_bCanHear, TEXT("ToolTip"), TEXT("Can the pawn hear?"));
 				MetaData->SetValue(NewProp_bisLooping, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_bisLooping, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
-				MetaData->SetValue(NewProp_bisLooping, TEXT("ToolTip"), TEXT("Can The pawn hear?"));
+				MetaData->SetValue(NewProp_bisLooping, TEXT("ToolTip"), TEXT("CHECK THIS ?"));
 				MetaData->SetValue(NewProp_AIState, TEXT("Category"), TEXT("AI"));
 				MetaData->SetValue(NewProp_AIState, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 				MetaData->SetValue(NewProp_PatrolTargetPoints, TEXT("Category"), TEXT("AI"));
@@ -592,7 +593,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x7C1651D1;
+			Guid.A = 0x4863203C;
 			Guid.B = 0x615561AB;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;

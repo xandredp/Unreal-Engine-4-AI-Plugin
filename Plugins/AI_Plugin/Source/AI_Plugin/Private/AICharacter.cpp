@@ -235,9 +235,9 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 				if (YellForHelpOnContact)
 				{
-					if (DebugDrawEnabled)
+					//if (DebugDrawEnabled)
 					{
-						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I see the bastard - Form up on me you guys"));
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" - I see the bastard - Form up on me you guys"));
 					}
 					for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 					{
@@ -245,7 +245,7 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 						AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
 
-						if (ActorItr->GetName() == AIController->GetName())
+						if (AIController2->GetName() == AIController->GetName())
 						{
 							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
 							// Skip me you plonker
