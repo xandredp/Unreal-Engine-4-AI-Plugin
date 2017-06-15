@@ -1,3 +1,75 @@
+commit c8bdeb12146f80b7b6569a625801d15b31cd6b6d
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Fri Jun 16 11:02:56 2017 +1200
+
+    Revert "Working .exe push"
+    
+    This reverts commit 076d5422ca3cedae3f9cae98052b4232e1210408.
+
+commit 076d5422ca3cedae3f9cae98052b4232e1210408
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Fri Jun 16 10:40:52 2017 +1200
+
+    Working .exe push
+
+commit 1c752c768077be4918e43132cc5f4dcbf6a7b0dd
+Author: Sena <sena0711@gmail.com>
+Date:   Fri Jun 16 09:56:00 2017 +1200
+
+    map changed a little for demo.
+
+commit b2e41c002b78bb194f5f8213d4c3d4ed1266c551
+Author: sena <sena0711@gmail.com>
+Date:   Fri Jun 16 07:11:05 2017 +1200
+
+    call for help changed as a seperate function and checked in tick for constant help calling. now assignes pawn as well as leader
+
+commit 14140ef9bbadde7e0fdd831543599bfed62b4831
+Author: sena <sena0711@gmail.com>
+Date:   Fri Jun 16 05:40:40 2017 +1200
+
+    build asset
+
+commit e0424f89aeeb1d3a0d0543c144884bb3f76b166d
+Author: sena <sena0711@gmail.com>
+Date:   Fri Jun 16 05:40:26 2017 +1200
+
+    Blocking hearing done.
+
+commit 6ab329c6d9c0bf12eedea06865f5d6481bcbc09d
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Fri Jun 16 00:20:29 2017 +1200
+
+    Fix Hearing Agression - Slight cheat since BT needs a pawn to MoveTo - used the playercharacter pawn as location of sound
+
+commit 485598b4fb7d3ad629a8565c748f14c8549e0a89
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Thu Jun 15 23:43:20 2017 +1200
+
+    Fixed bug in Yell for Help. Leader used to sometimes follow herself - see detail
+    
+    Fixed up some Room drescriptions
+    Re-pointed some AIs to use the Common BT again
+
+commit dd4e93aecbe71171a9e843febaf8ea62c1705d2f
+Merge: bea89e6 07b1d3a
+Author: Sena <sena0711@gmail.com>
+Date:   Thu Jun 15 20:36:43 2017 +1200
+
+    Merge branch 'master' of https://github.com/xandredp/Unreal-Engine-4-AI-Plugin.git
+
+commit bea89e6995a1b82c587557a9b1e615d0b44ff2fe
+Author: Sena <sena0711@gmail.com>
+Date:   Thu Jun 15 20:36:37 2017 +1200
+
+    Following AIs completed.
+
+commit 07b1d3affee5be69395d868037cd0791fa9eebf5
+Author: xandredp <xduplooy@gmail.com>
+Date:   Thu Jun 15 20:13:29 2017 +1200
+
+    Git Log in .txt push
+
 commit 71eaf0fa7819f86363a1d6f7e974c02ac3e07a23
 Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
 Date:   Thu Jun 15 12:36:01 2017 +1200
