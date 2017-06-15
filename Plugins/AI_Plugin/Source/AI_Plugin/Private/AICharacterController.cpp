@@ -118,7 +118,7 @@ bool AAICharacterController::GetIsArrayGoingUp()
 
 EBotBehaviorType AAICharacterController::GetAIState()
 {
-	EBotBehaviorType ReturnState;
+	EBotBehaviorType ReturnState = EBotBehaviorType::Neutral;
 	if (BlackboardComp)
 	{
 		FString CurrentState = BlackboardComp->GetValueAsString(AIStateKeyName);

@@ -3,7 +3,7 @@
 #include "AI_PluginPrivatePCH.h"
 #include "AI_Plugin.h"
 #include "AICharacter.h"
-
+#include "SoundBlockingActor.h"
 #include "AICharacterController.h"
 
 
@@ -32,6 +32,7 @@ AAICharacter::AAICharacter()
 void AAICharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
 	AiMesh = GetMesh();
 	
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
@@ -139,28 +140,18 @@ void AAICharacter::Tick(float DeltaSeconds)
 			//getplayercontrol->WasInputKeyJustPressed(EKeys::B)
 
 			// Define end point of the trace
-			APawn* AIPawn = AIController->GetControlledPawn();
+			APawn* AIPawn = AIController->GetPawn();
 			FVector End = AIPawn->GetActorLocation();
 
 			UCapsuleComponent* bob = this->GetCapsuleComponent();
 			FVector CapStart = bob->GetComponentLocation();
-			
-
-
 			FString TheFloatStr = FString::SanitizeFloat(CapStart.X);
 			//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, "Capsule X=" + TheFloatStr);
-
 			FRotator Rot = AIPawn->GetViewRotation();
-			
 			FVector ForwardVec = AIPawn->GetActorForwardVector();
 			
-
-			// The line trace function
-			GetWorld()->LineTraceSingleByChannel(Hit, Start, End, ECC_Pawn, TraceParams);
-
 			if (DebugDrawEnabled) 
 			{			
-				DrawDebugLine(GetWorld(), Start, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 1.0f);
 				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
 				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
 			}
@@ -192,7 +183,7 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ABaseCharacter* SensedPawn = Cast<ABaseCharacter>(Pawn);
-		APawn* ThisAIPawn = AIController->GetControlledPawn();
+		APawn* ThisAIPawn = AIController->GetPawn();
 
 
 
@@ -200,7 +191,7 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 		{
 
 			FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
-			FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected);//FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
+			FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);//FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
 			if (DebugDrawEnabled)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SEEN"));
@@ -330,24 +321,28 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 	LastHeardTime = GetWorld()->GetTimeSeconds();
 
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
-	APawn* ThisAIPawn = AIController->GetControlledPawn();
+	APawn* ThisAIPawn = AIController->GetPawn();
 
 	if (AIController)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI detected a Noise!"));
-
-		
-
-		AIController->SetTargetEnemy(GetWorld()->GetFirstPlayerController()->GetControlledPawn()  );
-
-
-		AIState = EBotBehaviorType::Agression;
-		AIController->SetBlackboardBotState(AIState);
-
+	{		
+		//Check if there is blocking actor between the ai and player
+		//if there is do nothing
+		if (ASoundBlockingActor* blockingActor = GetSoundBlockingActorInView())
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Purple, "Blocker is blocking the  Noise.");
+		}
+		//if there is nothing blocking in between assign the target enemy
+		else
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI detected a Noise!"));
+			AIController->SetTargetEnemy(GetWorld()->GetFirstPlayerController()->GetPawn());
+			AIState = EBotBehaviorType::Agression;
+			AIController->SetBlackboardBotState(AIState);
+		}
 
 		if (YellForHelpOnContact)
 		{
-			//if (DebugDrawEnabled)
+			if (DebugDrawEnabled)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" - I hear the bastard - Form up on me you guys"));
 			}
@@ -407,4 +402,33 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 			}
 		}
 	}
+}
+ASoundBlockingActor* AAICharacter::GetSoundBlockingActorInView()
+{// Define the parameters
+	FCollisionQueryParams TraceParams(TEXT("TraceBlcokingActor"), true, this);
+	TraceParams.bTraceAsyncScene = true;
+	TraceParams.bReturnPhysicalMaterial = false;
+
+	/* Not tracing complex uses the rough collision instead making tiny objects easier to select. */
+	TraceParams.bTraceComplex = false;
+
+	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
+
+	// Re-Initialize hit info
+	FHitResult Hit(ForceInit);
+	// Define start point of the trace
+	FVector PlayerLocation = PlayerCharacter->GetActorLocation();
+	APawn* AIPawn = AIController->GetPawn();
+	FVector AILocation = AIPawn->GetActorLocation();
+
+//	Controller->GetPlayerViewPoint(CamLoc, CamRot);
+	const FVector TraceStart = PlayerLocation;
+	const FVector TraceEnd = AILocation;
+	GetWorld()->LineTraceSingleByChannel(Hit, TraceStart, TraceEnd, ECC_Visibility, TraceParams);
+	if (DebugDrawEnabled)
+	{
+		DrawDebugLine(GetWorld(), TraceStart, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 1.0f);
+	}
+	return Cast<ASoundBlockingActor>(Hit.GetActor());
 }

@@ -30,6 +30,10 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	{
 	}
 	IMPLEMENT_CLASS(AMyTargetPoint, 3066406667);
+	void ASoundBlockingActor::StaticRegisterNativesASoundBlockingActor()
+	{
+	}
+	IMPLEMENT_CLASS(ASoundBlockingActor, 3668137439);
 	void AAIFollwingPoint::StaticRegisterNativesAAIFollwingPoint()
 	{
 	}
@@ -41,10 +45,11 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	IMPLEMENT_CLASS(ABaseCharacter, 2566995785);
 	void AAICharacter::StaticRegisterNativesAAICharacter()
 	{
+		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "GetSoundBlockingActorInView",(Native)&AAICharacter::execGetSoundBlockingActorInView);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 630955040);
+	IMPLEMENT_CLASS(AAICharacter, 3122964473);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacterController::StaticClass(), "SetCurrentWayPoint",(Native)&AAICharacterController::execSetCurrentWayPoint);
@@ -77,11 +82,14 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UEnum* Z_Construct_UEnum_AI_Plugin_EBotBehaviorType();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AMyTargetPoint();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_ASoundBlockingActor_NoRegister();
+	AI_PLUGIN_API class UClass* Z_Construct_UClass_ASoundBlockingActor();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAIFollwingPoint_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAIFollwingPoint();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_ABaseCharacter_MakePawnNoise();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_ABaseCharacter();
+	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnSeePlayer();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter_NoRegister();
@@ -195,6 +203,37 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_AMyTargetPoint(Z_Construct_UClass_AMyTargetPoint, &AMyTargetPoint::StaticClass, TEXT("AMyTargetPoint"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(AMyTargetPoint);
+	UClass* Z_Construct_UClass_ASoundBlockingActor_NoRegister()
+	{
+		return ASoundBlockingActor::StaticClass();
+	}
+	UClass* Z_Construct_UClass_ASoundBlockingActor()
+	{
+		static UClass* OuterClass = NULL;
+		if (!OuterClass)
+		{
+			Z_Construct_UClass_AActor();
+			Z_Construct_UPackage__Script_AI_Plugin();
+			OuterClass = ASoundBlockingActor::StaticClass();
+			if (!(OuterClass->ClassFlags & CLASS_Constructed))
+			{
+				UObjectForceRegistration(OuterClass);
+				OuterClass->ClassFlags |= 0x20800080;
+
+
+				OuterClass->StaticLink();
+#if WITH_METADATA
+				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
+				MetaData->SetValue(OuterClass, TEXT("IncludePath"), TEXT("SoundBlockingActor.h"));
+				MetaData->SetValue(OuterClass, TEXT("ModuleRelativePath"), TEXT("Public/SoundBlockingActor.h"));
+#endif
+			}
+		}
+		check(OuterClass->GetClass());
+		return OuterClass;
+	}
+	static FCompiledInDefer Z_CompiledInDefer_UClass_ASoundBlockingActor(Z_Construct_UClass_ASoundBlockingActor, &ASoundBlockingActor::StaticClass, TEXT("ASoundBlockingActor"), false, nullptr, nullptr, nullptr);
+	DEFINE_VTABLE_PTR_HELPER_CTOR(ASoundBlockingActor);
 	UClass* Z_Construct_UClass_AAIFollwingPoint_NoRegister()
 	{
 		return AAIFollwingPoint::StaticClass();
@@ -299,6 +338,28 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 	}
 	static FCompiledInDefer Z_CompiledInDefer_UClass_ABaseCharacter(Z_Construct_UClass_ABaseCharacter, &ABaseCharacter::StaticClass, TEXT("ABaseCharacter"), false, nullptr, nullptr, nullptr);
 	DEFINE_VTABLE_PTR_HELPER_CTOR(ABaseCharacter);
+	UFunction* Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView()
+	{
+		struct AICharacter_eventGetSoundBlockingActorInView_Parms
+		{
+			ASoundBlockingActor* ReturnValue;
+		};
+		UObject* Outer=Z_Construct_UClass_AAICharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("GetSoundBlockingActorInView"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(AICharacter_eventGetSoundBlockingActorInView_Parms));
+			UProperty* NewProp_ReturnValue = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("ReturnValue"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(ReturnValue, AICharacter_eventGetSoundBlockingActorInView_Parms), 0x0010000000000580, Z_Construct_UClass_ASoundBlockingActor_NoRegister());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("SeenCondition"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise()
 	{
 		struct AICharacter_eventOnHearNoise_Parms
@@ -363,6 +424,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				UObjectForceRegistration(OuterClass);
 				OuterClass->ClassFlags |= 0x20900080;
 
+				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView());
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnHearNoise());
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnSeePlayer());
 
@@ -389,6 +451,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_AiMesh = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AiMesh"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(AiMesh, AAICharacter), 0x0010000000080009, Z_Construct_UClass_USkeletalMeshComponent_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView(), "GetSoundBlockingActorInView"); // 4128273195
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnHearNoise(), "OnHearNoise"); // 1130803556
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnSeePlayer(), "OnSeePlayer"); // 3798450267
 				OuterClass->StaticLink();
@@ -593,8 +656,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x4863203C;
-			Guid.B = 0x615561AB;
+			Guid.A = 0x0C914DC2;
+			Guid.B = 0xBDFA7128;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

@@ -6,6 +6,7 @@
 ===========================================================================*/
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class ASoundBlockingActor;
 class APawn;
 struct FVector;
 #ifdef AI_PLUGIN_AICharacter_generated_h
@@ -13,7 +14,15 @@ struct FVector;
 #endif
 #define AI_PLUGIN_AICharacter_generated_h
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_RPC_WRAPPERS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execGetSoundBlockingActorInView) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(ASoundBlockingActor**)Z_Param__Result=this->GetSoundBlockingActorInView(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execOnHearNoise) \
 	{ \
@@ -36,7 +45,15 @@ struct FVector;
 	}
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execGetSoundBlockingActorInView) \
+	{ \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		*(ASoundBlockingActor**)Z_Param__Result=this->GetSoundBlockingActorInView(); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execOnHearNoise) \
 	{ \
@@ -59,7 +76,7 @@ struct FVector;
 	}
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_INCLASS_NO_PURE_DECLS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_INCLASS_NO_PURE_DECLS \
 	private: \
 	static void StaticRegisterNativesAAICharacter(); \
 	friend AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter(); \
@@ -70,7 +87,7 @@ struct FVector;
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_INCLASS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_INCLASS \
 	private: \
 	static void StaticRegisterNativesAAICharacter(); \
 	friend AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter(); \
@@ -81,7 +98,7 @@ struct FVector;
 	enum {IsIntrinsic=COMPILED_IN_INTRINSIC};
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_STANDARD_CONSTRUCTORS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AAICharacter(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AAICharacter) \
@@ -94,7 +111,7 @@ private: \
 public:
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_ENHANCED_CONSTRUCTORS \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AAICharacter(AAICharacter&&); \
@@ -105,32 +122,32 @@ DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(AAICharacter); \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AAICharacter)
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_PRIVATE_PROPERTY_OFFSET
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_16_PROLOG
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_GENERATED_BODY_LEGACY \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_PRIVATE_PROPERTY_OFFSET
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_17_PROLOG
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_PRIVATE_PROPERTY_OFFSET \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_RPC_WRAPPERS \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_INCLASS \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_STANDARD_CONSTRUCTORS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_PRIVATE_PROPERTY_OFFSET \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_INCLASS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_GENERATED_BODY \
+#define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_PRIVATE_PROPERTY_OFFSET \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_INCLASS_NO_PURE_DECLS \
-	Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_19_ENHANCED_CONSTRUCTORS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_PRIVATE_PROPERTY_OFFSET \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_INCLASS_NO_PURE_DECLS \
+	AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID Unreal_Engine_4_AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h
+#define CURRENT_FILE_ID AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

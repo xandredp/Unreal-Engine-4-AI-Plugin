@@ -5,6 +5,7 @@
 
 #include "TypeClass.h"
 #include "MyTargetPoint.h"
+#include "SoundBlockingActor.h"
 #include "AIFollwingPoint.h"
 #include "Perception/PawnSensingComponent.h"
 #include "BaseCharacter.h"
@@ -103,4 +104,6 @@ public:
 	UFUNCTION()
 		void OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume);
 	
+	UFUNCTION(BlueprintCallable, Category = "SeenCondition")
+		ASoundBlockingActor* GetSoundBlockingActorInView();
 };

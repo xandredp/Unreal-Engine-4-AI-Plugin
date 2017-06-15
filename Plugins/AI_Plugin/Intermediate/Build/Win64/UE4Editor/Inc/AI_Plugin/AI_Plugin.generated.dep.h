@@ -14,6 +14,9 @@
 #ifndef AI_PLUGIN_MyTargetPoint_generated_h
 	#include "Public/MyTargetPoint.h"
 #endif
+#ifndef AI_PLUGIN_SoundBlockingActor_generated_h
+	#include "Public/SoundBlockingActor.h"
+#endif
 #ifndef AI_PLUGIN_AIFollwingPoint_generated_h
 	#include "Public/AIFollwingPoint.h"
 #endif
