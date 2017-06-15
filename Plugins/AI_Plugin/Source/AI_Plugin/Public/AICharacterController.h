@@ -54,7 +54,7 @@ class AI_PLUGIN_API AAICharacterController : public AAIController
 public:
 	//Track what current Patrol point AI Character is at. 
 	int32 CurrentPatrolPoint;
-
+	AAICharacter* AICharacter;
 
 
 public:

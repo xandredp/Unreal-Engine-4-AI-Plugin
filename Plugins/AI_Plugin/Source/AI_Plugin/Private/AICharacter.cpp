@@ -25,6 +25,7 @@ AAICharacter::AAICharacter()
 	bFirstTimeSeen = true;
 	DebugDrawEnabled = false;
 	YellForHelpOnContact = true;
+	bChasingEnemy = false;
 }
 
 
@@ -34,7 +35,8 @@ void AAICharacter::BeginPlay()
 	Super::BeginPlay();
 
 	AiMesh = GetMesh();
-	
+
+	aPlayerCharacter = GetWorld()->GetFirstPlayerController()->GetPawn();
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 	if (AIController)
 	{	/*SetBalckboardData*/
@@ -59,15 +61,10 @@ void AAICharacter::BeginPlay()
 	//The actor is going to be following
 	if (AIFollwingPoints.Num() != 0)
 	{
-
-		GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("if"));
-		//const FAttachmentTransformRules& attachmentrules(LocationRule, RotationRule, ScaleRule);
 		for (int i = 0; i < AIFollwingPoints.Num(); i++)
 		{
-			GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("for"));
 			if (AIFollwingPoints[i]->IsValidLowLevel())
 			{
-				GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, TEXT("attach"));
 				AIFollwingPoints[i]->AttachToComponent(AiMesh, FAttachmentTransformRules(EAttachmentRule::KeepWorld, true));
 			}
 		}
@@ -111,15 +108,21 @@ void AAICharacter::Tick(float DeltaSeconds)
 			//Sensed the player
 
 			AIController->SetTargetEnemy(nullptr);
+			bChasingEnemy = false;
 			//resetvariableTo use in  OnseePlayer
 			bFirstTimeSeen = true;
 		}
 
 	}
 
-	
-	if (bCanHear)
+	//if yell for help is true
+	if (bChasingEnemy &&  YellForHelpOnContact)
 	{
+		YellForHelp(aPlayerCharacter);
+	}
+
+	//if (bCanHear)
+//	{
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 
@@ -150,13 +153,20 @@ void AAICharacter::Tick(float DeltaSeconds)
 			FRotator Rot = AIPawn->GetViewRotation();
 			FVector ForwardVec = AIPawn->GetActorForwardVector();
 			
-			if (DebugDrawEnabled) 
-			{			
-				DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
-				DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
+			if (DebugDrawEnabled)
+			{
+				if (bCanSee)
+				{
+					DrawDebugCone(GetWorld(), CapStart, ForwardVec, this->PawnSensingComp->SightRadius, (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), (this->PawnSensingComp->GetPeripheralVisionAngle() * (3.14159265 / 180)), 20, FColor::Purple, false, 1.0, 1, 1.0);
+				}
+				if (bCanHear)
+				{
+					DrawDebugSphere(GetWorld(), CapStart, this->PawnSensingComp->LOSHearingThreshold, 20, FColor::Yellow, false, 0.05, 0, 1.0f);
+
+				}
 			}
 		}
-	}
+	//}
 }
 
 void AAICharacter::OnSeePlayer(APawn* Pawn)
@@ -183,9 +193,6 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 
 		AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
 		ABaseCharacter* SensedPawn = Cast<ABaseCharacter>(Pawn);
-		APawn* ThisAIPawn = AIController->GetPawn();
-
-
 
 		if (AIController && SensedPawn)
 		{
@@ -203,9 +210,6 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 			AIController->SetBlackboardBotState(AIState);
 		//	AIController->SetTargetEnemy(SensedPawn);
 
-			UCapsuleComponent* bob = this->GetCapsuleComponent();
-			FVector ThisAILocation = bob->GetComponentLocation();
-
 			//if the last time seen is bigger than maximun duration
 			if (LastSeenTime - FirstSeenTime > SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime)
 			{
@@ -213,78 +217,12 @@ void AAICharacter::OnSeePlayer(APawn* Pawn)
 				{
 					GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("Following"));
 				}
-				
-				/*FString TheFloatStr = FString::SanitizeFloat(LastSeenTime - FirstSeenTime);
-				FString TheFloatStr1 = FString::SanitizeFloat(SensedPawn->ValToMakePawnUnDetected* DetectionMaxTime);
-				
-				*/
 
 				AIState = EBotBehaviorType::Agression;
 				AIController->SetBlackboardBotState(AIState);
 				//Sensed the player
 				AIController->SetTargetEnemy(SensedPawn);
-
-				if (YellForHelpOnContact)
-				{
-					//if (DebugDrawEnabled)
-					{
-						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" - I see the bastard - Form up on me you guys"));
-					}
-					for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-					{
-						ActorItr->GetController()->GetName();
-
-						AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
-
-						if (AIController2->GetName() == AIController->GetName())
-						{
-							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
-							// Skip me you plonker
-						}
-						else
-						{
-							// Dont override any "helping" that is already happening - this should stop a crazy swarm of dumbos from forming
-
-							if (AIController2->GetAIState() == EBotBehaviorType::Helping)
-							{
-								// This AI is already Helping so skip
-							}
-							else
-							{
-								// Make sure the yell for help only works for a limited range
-
-								FVector	ThisLocation = AIController2->GetCharacter()->GetActorLocation();
-
-								float Length = (ThisLocation - ThisAILocation).Size();
-
-								// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the Yelling AI LOSHearingThreshold
-
-								float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
-								if (DebugDrawEnabled)
-								{
-									GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hearing test for " + ActorItr->GetName() + " : MaxHearingRange=" + FString::SanitizeFloat(MaxHearingRange) + " Length=" + FString::SanitizeFloat(Length));
-								}
-								if (Length > MaxHearingRange)
-								{
-									// Yelled but this AI is too far away to hear us
-									if (DebugDrawEnabled)
-									{
-										GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName() + " Too far to here me yell");
-									}
-								}
-								else
-								{
-									//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
-									AIState = EBotBehaviorType::Helping;
-									AIController2->SetBlackboardBotState(AIState);
-									// Set the others to target my AI position
-									AIController2->SetLeaderToHelp(ThisAIPawn);
-								}
-
-							}
-						}
-					}
-				}
+				bChasingEnemy = true;			
 			}			
 		}
 		else
@@ -314,14 +252,11 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 	
 	}
 
-	UCapsuleComponent* bob = this->GetCapsuleComponent();
-	FVector ThisAILocation = bob->GetComponentLocation();
-	
+
 	bSensedTarget = true;
 	LastHeardTime = GetWorld()->GetTimeSeconds();
 
 	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
-	APawn* ThisAIPawn = AIController->GetPawn();
 
 	if (AIController)
 	{		
@@ -335,72 +270,15 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 		else
 		{
 			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI detected a Noise!"));
-			AIController->SetTargetEnemy(GetWorld()->GetFirstPlayerController()->GetPawn());
+			aPlayerCharacter = GetWorld()->GetFirstPlayerController()->GetPawn();
+			AIController->SetTargetEnemy(aPlayerCharacter);
+			bChasingEnemy = true;
+			
 			AIState = EBotBehaviorType::Agression;
 			AIController->SetBlackboardBotState(AIState);
 		}
 
-		if (YellForHelpOnContact)
-		{
-			if (DebugDrawEnabled)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" - I hear the bastard - Form up on me you guys"));
-			}
-			for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
-			{
-				ActorItr->GetController()->GetName();
-
-				AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
-
-				if (AIController2->GetName() == AIController->GetName())
-				{
-					//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
-					// Skip me you plonker
-				}
-				else
-				{
-					// Dont override any "helping" that is already happening - this should stop a crazy swarm of dumbos from forming
-
-					if (AIController2->GetAIState() == EBotBehaviorType::Helping)
-					{
-						// This AI is already Helping so skip
-					}
-					else
-					{
-						// Make sure the yell for help only works for a limited range
-
-						FVector	ThisLocation = AIController2->GetCharacter()->GetActorLocation();
-
-						float Length = (ThisLocation - ThisAILocation).Size();
-
-						// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the Yelling AI LOSHearingThreshold
-
-						float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
-						if (DebugDrawEnabled)
-						{
-							GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, "Hearing test for " + ActorItr->GetName() + " : MaxHearingRange=" + FString::SanitizeFloat(MaxHearingRange) + " Length=" + FString::SanitizeFloat(Length));
-						}
-						if (Length > MaxHearingRange)
-						{
-							// Yelled but this AI is too far away to hear us
-							if (DebugDrawEnabled)
-							{
-								GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName() + " Too far to here me yell");
-							}
-						}
-						else
-						{
-							//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
-							AIState = EBotBehaviorType::Helping;
-							AIController2->SetBlackboardBotState(AIState);
-							// Set the others to target my AI position
-							AIController2->SetLeaderToHelp(ThisAIPawn);
-						}
-
-					}
-				}
-			}
-		}
+		
 	}
 }
 ASoundBlockingActor* AAICharacter::GetSoundBlockingActorInView()
@@ -431,4 +309,68 @@ ASoundBlockingActor* AAICharacter::GetSoundBlockingActorInView()
 		DrawDebugLine(GetWorld(), TraceStart, Hit.TraceEnd, FColor::Green, true, 0.05f, 0.0f, 1.0f);
 	}
 	return Cast<ASoundBlockingActor>(Hit.GetActor());
+}
+
+void AAICharacter::YellForHelp(APawn * SensedPawn)
+{
+	AAICharacterController* AIController = Cast<AAICharacterController>(GetController());
+	UCapsuleComponent* ThisAI = this->GetCapsuleComponent();
+	FVector ThisAILocation = ThisAI->GetComponentLocation();
+	APawn* ThisAIPawn = AIController->GetPawn();
+
+	if (YellForHelpOnContact)
+	{
+		if (DebugDrawEnabled)
+		{
+			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" YellingForHelp"));
+		}
+		for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
+		{
+			ActorItr->GetController()->GetName();
+
+			AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
+
+			if (AIController2->GetName() == AIController->GetName())
+			{
+			}
+			else
+			{
+				// Dont override any "helping" that is already happening - this should stop a crazy swarm of dumbos from forming
+				if (AIController2->GetAIState() == EBotBehaviorType::Helping)
+				{
+					if (DebugDrawEnabled)
+					{
+						GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName() + " I am Helping");
+					}
+				}
+				else
+				{
+					// Make sure the yell for help only works for a limited range
+
+					FVector	ThisLocation = AIController2->GetCharacter()->GetActorLocation();
+					float Length = (ThisLocation - ThisAILocation).Size();
+
+					// it calculates MaxHearingRange using the range of the ears of the Listening AI not the ears of the Yelling AI LOSHearingThreshold
+
+					float MaxHearingRange = ActorItr->PawnSensingComp->LOSHearingThreshold;
+
+					if (Length > MaxHearingRange)
+					{
+
+					}
+					else
+					{
+						//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, ActorItr->GetName());
+						AIState = EBotBehaviorType::Helping;
+						AIController2->SetBlackboardBotState(AIState);
+						// Set the others to target my AI position
+						AIController2->SetLeaderToHelp(ThisAIPawn);
+						AIController2->SetTargetEnemy(SensedPawn);
+					
+					}
+
+				}
+			}
+		}
+	}
 }

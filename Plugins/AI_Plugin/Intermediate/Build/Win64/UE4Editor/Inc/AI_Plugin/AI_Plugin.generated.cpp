@@ -48,8 +48,9 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "GetSoundBlockingActorInView",(Native)&AAICharacter::execGetSoundBlockingActorInView);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnHearNoise",(Native)&AAICharacter::execOnHearNoise);
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "OnSeePlayer",(Native)&AAICharacter::execOnSeePlayer);
+		FNativeFunctionRegistrar::RegisterFunction(AAICharacter::StaticClass(), "YellForHelp",(Native)&AAICharacter::execYellForHelp);
 	}
-	IMPLEMENT_CLASS(AAICharacter, 3122964473);
+	IMPLEMENT_CLASS(AAICharacter, 670953342);
 	void AAICharacterController::StaticRegisterNativesAAICharacterController()
 	{
 		FNativeFunctionRegistrar::RegisterFunction(AAICharacterController::StaticClass(), "SetCurrentWayPoint",(Native)&AAICharacterController::execSetCurrentWayPoint);
@@ -92,6 +93,7 @@ static FCompiledInDeferEnum Z_CompiledInDeferEnum_UEnum_EBotBehaviorType(EBotBeh
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnHearNoise();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_OnSeePlayer();
+	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacter_YellForHelp();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter_NoRegister();
 	AI_PLUGIN_API class UClass* Z_Construct_UClass_AAICharacter();
 	AI_PLUGIN_API class UFunction* Z_Construct_UFunction_AAICharacterController_SetCurrentWayPoint();
@@ -354,7 +356,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnFunction->StaticLink();
 #if WITH_METADATA
 			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
-			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("SeenCondition"));
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("AI"));
 			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
 #endif
 		}
@@ -407,6 +409,28 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 		}
 		return ReturnFunction;
 	}
+	UFunction* Z_Construct_UFunction_AAICharacter_YellForHelp()
+	{
+		struct AICharacter_eventYellForHelp_Parms
+		{
+			APawn* SensedPawn;
+		};
+		UObject* Outer=Z_Construct_UClass_AAICharacter();
+		static UFunction* ReturnFunction = NULL;
+		if (!ReturnFunction)
+		{
+			ReturnFunction = new(EC_InternalUseOnlyConstructor, Outer, TEXT("YellForHelp"), RF_Public|RF_Transient|RF_MarkAsNative) UFunction(FObjectInitializer(), NULL, 0x04020401, 65535, sizeof(AICharacter_eventYellForHelp_Parms));
+			UProperty* NewProp_SensedPawn = new(EC_InternalUseOnlyConstructor, ReturnFunction, TEXT("SensedPawn"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(SensedPawn, AICharacter_eventYellForHelp_Parms), 0x0010000000000080, Z_Construct_UClass_APawn_NoRegister());
+			ReturnFunction->Bind();
+			ReturnFunction->StaticLink();
+#if WITH_METADATA
+			UMetaData* MetaData = ReturnFunction->GetOutermost()->GetMetaData();
+			MetaData->SetValue(ReturnFunction, TEXT("Category"), TEXT("AI"));
+			MetaData->SetValue(ReturnFunction, TEXT("ModuleRelativePath"), TEXT("Public/AICharacter.h"));
+#endif
+		}
+		return ReturnFunction;
+	}
 	UClass* Z_Construct_UClass_AAICharacter_NoRegister()
 	{
 		return AAICharacter::StaticClass();
@@ -427,6 +451,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView());
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnHearNoise());
 				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_OnSeePlayer());
+				OuterClass->LinkChild(Z_Construct_UFunction_AAICharacter_YellForHelp());
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_AIFollowPoint = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AIFollowPoint"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(AIFollowPoint, AAICharacter), 0x0010000000000005, Z_Construct_UClass_AAIFollwingPoint_NoRegister());
@@ -451,9 +476,10 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 				UProperty* NewProp_AiMesh = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("AiMesh"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(AiMesh, AAICharacter), 0x0010000000080009, Z_Construct_UClass_USkeletalMeshComponent_NoRegister());
 				UProperty* NewProp_BehaviorTree = new(EC_InternalUseOnlyConstructor, OuterClass, TEXT("BehaviorTree"), RF_Public|RF_Transient|RF_MarkAsNative) UObjectProperty(CPP_PROPERTY_BASE(BehaviorTree, AAICharacter), 0x0010000000000001, Z_Construct_UClass_UBehaviorTree_NoRegister());
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
-				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView(), "GetSoundBlockingActorInView"); // 4128273195
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_GetSoundBlockingActorInView(), "GetSoundBlockingActorInView"); // 352953049
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnHearNoise(), "OnHearNoise"); // 1130803556
 				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_OnSeePlayer(), "OnSeePlayer"); // 3798450267
+				OuterClass->AddFunctionToFunctionMapWithOverriddenName(Z_Construct_UFunction_AAICharacter_YellForHelp(), "YellForHelp"); // 4250739088
 				OuterClass->StaticLink();
 #if WITH_METADATA
 				UMetaData* MetaData = OuterClass->GetOutermost()->GetMetaData();
@@ -656,8 +682,8 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 			ReturnPackage = CastChecked<UPackage>(StaticFindObjectFast(UPackage::StaticClass(), NULL, FName(TEXT("/Script/AI_Plugin")), false, false));
 			ReturnPackage->SetPackageFlags(PKG_CompiledIn | 0x00000000);
 			FGuid Guid;
-			Guid.A = 0x0C914DC2;
-			Guid.B = 0xBDFA7128;
+			Guid.A = 0x99AB2179;
+			Guid.B = 0x3181C4A2;
 			Guid.C = 0x00000000;
 			Guid.D = 0x00000000;
 			ReturnPackage->SetGuid(Guid);

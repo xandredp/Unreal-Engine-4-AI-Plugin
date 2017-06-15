@@ -6,8 +6,8 @@
 ===========================================================================*/
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
-class ASoundBlockingActor;
 class APawn;
+class ASoundBlockingActor;
 struct FVector;
 #ifdef AI_PLUGIN_AICharacter_generated_h
 #error "AICharacter.generated.h already included, missing '#pragma once' in AICharacter.h"
@@ -15,6 +15,15 @@ struct FVector;
 #define AI_PLUGIN_AICharacter_generated_h
 
 #define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execYellForHelp) \
+	{ \
+		P_GET_OBJECT(APawn,Z_Param_SensedPawn); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->YellForHelp(Z_Param_SensedPawn); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetSoundBlockingActorInView) \
 	{ \
@@ -46,6 +55,15 @@ struct FVector;
 
 
 #define AI_Plugin_Plugins_AI_Plugin_Source_AI_Plugin_Public_AICharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execYellForHelp) \
+	{ \
+		P_GET_OBJECT(APawn,Z_Param_SensedPawn); \
+		P_FINISH; \
+		P_NATIVE_BEGIN; \
+		this->YellForHelp(Z_Param_SensedPawn); \
+		P_NATIVE_END; \
+	} \
  \
 	DECLARE_FUNCTION(execGetSoundBlockingActorInView) \
 	{ \

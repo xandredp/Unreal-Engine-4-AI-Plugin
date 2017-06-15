@@ -77,6 +77,9 @@ public:
 	/* Bool to Check in Onseeplayer */
 	bool bFirstTimeSeen;
 
+	/* Bool to Check if Ai is Chasing Enemy This will be used in Tick with yellforHelp */
+	bool bChasingEnemy;
+
 	/* Maximum Timetaken to detect player This decides how fast enemy is Seen */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI")
 	float DetectionMaxTime;
@@ -89,6 +92,8 @@ public:
 
 	/* Resets after sense time-out to avoid unnecessary clearing of target each tick */
 	bool bSensedTarget;
+
+	APawn* aPlayerCharacter;
 
 	/*For follwing AI*/
 
@@ -104,6 +109,10 @@ public:
 	UFUNCTION()
 		void OnHearNoise(APawn* PawnInstigator, const FVector& Location, float Volume);
 	
-	UFUNCTION(BlueprintCallable, Category = "SeenCondition")
+	UFUNCTION(BlueprintCallable, Category = "AI")
 		ASoundBlockingActor* GetSoundBlockingActorInView();
+
+
+	UFUNCTION(BlueprintCallable, Category = "AI")
+		void YellForHelp(APawn * SensedPawn);
 };

@@ -40,7 +40,7 @@ void AAICharacterController::Possess(APawn* aPawn)
 {
 	Super::Possess(aPawn);
 
-	AAICharacter* AICharacter = Cast<AAICharacter>(aPawn);
+	 AICharacter = Cast<AAICharacter>(aPawn);
 
 	if (AICharacter)
 	{
@@ -150,6 +150,15 @@ void AAICharacterController::SetTargetEnemy(APawn * NewTarget)
 	if (BlackboardComp)
 	{
 		BlackboardComp->SetValueAsObject(TargetEnemyKeyName, NewTarget);
+
+		if (NewTarget == nullptr)
+		{
+			AICharacter->bChasingEnemy = false;
+		}
+		else
+		{
+			AICharacter->bChasingEnemy = true;
+		}
 	}
 }
 
