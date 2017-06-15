@@ -336,7 +336,9 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Black, TEXT("AI detected a Noise!"));
 
-		AIController->SetTargetEnemy(PawnInstigator);
+		
+
+		AIController->SetTargetEnemy(GetWorld()->GetFirstPlayerController()->GetControlledPawn()  );
 
 
 		AIState = EBotBehaviorType::Agression;
@@ -345,9 +347,9 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 
 		if (YellForHelpOnContact)
 		{
-			if (DebugDrawEnabled)
+			//if (DebugDrawEnabled)
 			{
-				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("I heard the bastard - Form up on me you guys"));
+				GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, AIController->GetName() + TEXT(" - I hear the bastard - Form up on me you guys"));
 			}
 			for (TActorIterator<AAICharacter> ActorItr(GetWorld()); ActorItr; ++ActorItr)
 			{
@@ -355,7 +357,7 @@ void AAICharacter::OnHearNoise(APawn* PawnInstigator, const FVector& Location, f
 
 				AAICharacterController* AIController2 = Cast<AAICharacterController>(ActorItr->GetController());
 
-				if (ActorItr->GetName() == AIController->GetName())
+				if (AIController2->GetName() == AIController->GetName())
 				{
 					//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, ActorItr->GetName());
 					// Skip me you plonker
