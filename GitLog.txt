@@ -1,0 +1,315 @@
+commit 71eaf0fa7819f86363a1d6f7e974c02ac3e07a23
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Thu Jun 15 12:36:01 2017 +1200
+
+    Audio occlusion room
+
+commit dc993a36f02e5058f52923213255cf458b4a46d4
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Wed Jun 14 21:48:35 2017 +1200
+
+    Added room 5 - Follow and yell for help - on noise detected and no vision
+
+commit 36cd434090fcc24c539964e332698d5639a27f7a
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Wed Jun 14 21:19:06 2017 +1200
+
+    Fixed the Room Text a bit for the first 4 rooms
+
+commit 4cd862153f5ec6149753241b302f83b448b94dac
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Wed Jun 14 20:41:29 2017 +1200
+
+    Some AI bug fixes - see Description for more
+    
+    Moved the Y and Z switch code to the Level blueprint - instead of the
+    Player
+    
+    Remember that the debug can still be turned on and off at load time by
+    the setting on each AI object in the level
+    
+    Created/cloned a BTAI_Patrol_Common Behaviour Tree to be the common BT
+    for all the rooms. This has the super set of behviours but only shows
+    the ones that are enabled individually.
+    
+    Fixed a few bugs - see GIT diffs
+    
+    Moved the DebugDraw code so that it runs even if bCanSee bCanHear are
+    not enabled
+    Protected more Glogs with "if (DebugDrawEnabled)"
+
+commit ba93cde4f81fa6a10ed272d3744b43e9adf7681f
+Author: xandredp <xduplooy@gmail.com>
+Date:   Wed Jun 14 06:57:10 2017 +1200
+
+    Patrol with hearing and no sight section
+
+commit 536790b1e9249b96f9198ea1ac2ae8090cd40d28
+Author: xandredp <xduplooy@gmail.com>
+Date:   Tue Jun 13 08:36:38 2017 +1200
+
+    Map changes + Static sound cue to test occlusion
+
+commit 1cfd83ba2cece2bbca22795606f5d531eebca174
+Author: Sena <sena0711@gmail.com>
+Date:   Mon Jun 12 15:18:25 2017 +1200
+
+    Made new map and changed included detection delay to work again after michael's push .
+
+commit 2a5c3f28a6d472ac4f1ed9e4eab24fc91b7017d0
+Merge: 91bf731 e50a5c2
+Author: Sena <sena0711@gmail.com>
+Date:   Mon Jun 12 11:14:03 2017 +1200
+
+    Mergeconflict on character uassetTaking remote
+
+commit 91bf73176970dfbf2458af68c74021e8a1e28766
+Author: Sena <sena0711@gmail.com>
+Date:   Mon Jun 12 11:09:56 2017 +1200
+
+    Building a Demo Room
+
+commit e50a5c275935e6640aeaec89818bfb6cc12760a8
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Sun Jun 11 21:13:34 2017 +1200
+
+    Tuned up the AI so that yelling for help is limited by the PawnSensingComp->LOSHearingThreshold
+    
+    This means that yelling for help will not drag in all the AIs on the map
+    and you can control the PawnSensingComp->LOSHearingThreshold on a per AI
+    basis
+
+commit 3eb5d9f3ba17359bd9914744ae06d1ef0f241f18
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Sun Jun 11 17:52:13 2017 +1200
+
+    Improved AI
+    
+    Added AI "call for help"
+    Controlled by "Yell for help on contact" in the inherited C++
+    AIController
+    Y key = enable DebugDraws  - PawnSense site cones and hear sphere
+    Z key = disable DebugDraws
+    
+    Zapped all the Blueprint code in AI - all now in C++ and Behaviour Tree
+    and Blackboard data
+    
+    Fixed up the ignore file a bit too
+
+commit b4d80f903ef9f41cb71fc1df5c05909041e7afd1
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Sat Jun 10 21:47:28 2017 +1200
+
+    Added debug draw for hearing and visbility
+
+commit 09022981c9454bfd1be2bdac673201a672393db2
+Author: sena <sena0711@gmail.com>
+Date:   Fri Jun 9 07:05:37 2017 +1200
+
+    Quick test -AI follwing theory  using blueprint
+
+commit d259754228fd76899cca211bd7e98f7b8ea8d89e
+Author: sena <sena0711@gmail.com>
+Date:   Tue Jun 6 22:52:17 2017 +1200
+
+    fixed error from AuctorAudioOcculsionComponent
+    Included Base Character Arrow Comp. Other Characters will follow this Arrow Comp
+
+commit fd673c0efe241b85cf69b8fd94cbdce10e5fefc1
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Fri Jun 2 12:30:26 2017 +1200
+
+    Audio occlusion component
+
+commit f7811b65764ab79088302c54d1cf3722df03784e
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Fri Jun 2 10:43:28 2017 +1200
+
+    line trace from player to AIcharacter
+
+commit fdc22b8450e6c563879f7ba7f5e02c95eb113b3c
+Merge: 7d869d0 acb4fe8
+Author: sena <sena0711@gmail.com>
+Date:   Thu Jun 1 05:39:38 2017 +1200
+
+    Seen with ValToMakePawnUnDetected
+
+commit 7d869d0fbb2a96bee5965b5372a64000bc024d12
+Author: sena <sena0711@gmail.com>
+Date:   Thu Jun 1 05:35:34 2017 +1200
+
+    Seen depending on palyer's seeness.
+
+commit acb4fe85cefb35f26c766d0500df5bedb3b3b30c
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Wed May 31 22:44:52 2017 +1200
+
+    More changes to debug sight
+
+commit 7b06eb55f26ce413262bb639d5a06def3c659887
+Author: Faultbky <michaelwilliamson@hotmail.co.nz>
+Date:   Wed May 31 21:48:16 2017 +1200
+
+    AI Sight Cone Test In BP
+    
+    This will change later to be in vs for now it is a test
+
+commit ff9130fc7678bb3ea323f6031c7780a27268238b
+Merge: 77f2a0e 0f91cf6
+Author: sena <sena0711@gmail.com>
+Date:   Sat May 27 15:24:09 2017 +1200
+
+    Merge branch 'master' of https://github.com/xandredp/Unreal-Engine-4-AI-Plugin
+
+commit 77f2a0ee2765c1518ebc5f9d48014edadfa07efa
+Author: sena <sena0711@gmail.com>
+Date:   Sat May 27 15:01:50 2017 +1200
+
+    MakePawnUndetectedFunction
+
+commit 0f91cf63e4c9c34aba023b8530a40ca9038af98a
+Author: Sena <sena0711@gmail.com>
+Date:   Fri May 26 12:02:40 2017 +1200
+
+    Noise hear complete
+
+commit f5278363bfa5d9af3bd2b2a29e6360c4a0e2bc00
+Author: sena <sena0711@gmail.com>
+Date:   Thu May 25 22:48:21 2017 +1200
+
+    Make noise function inside PlayerCharacter using "Fire"Button that needs to be in project
+
+commit 6257c81c2ac5a09ef3a34e0ed0670adbe3f6514c
+Author: sena <sena0711@gmail.com>
+Date:   Thu May 25 20:34:13 2017 +1200
+
+    noise  emitter included in base character for users to use when making character.
+
+commit 4d1a897b1d6c6b99058705d80160384a408a4cde
+Author: sena <sena0711@gmail.com>
+Date:   Thu May 25 20:15:34 2017 +1200
+
+    Now on hear function added
+
+commit 5ae002e2bf7fe0dc486bdba3c470415063ffdee5
+Author: Sena <sena0711@gmail.com>
+Date:   Wed May 24 19:23:34 2017 +1200
+
+    Pawn now unsees the player
+
+commit 11a000a177dd73662b2e1d5f71062ac4501fa83d
+Author: sena <sena0711@gmail.com>
+Date:   Sun May 21 18:47:14 2017 +1200
+
+    patrol fully working TODO SEE: when out of sight deregister the pawn.
+
+commit ad1f1ab252bff668f5e0955d643905d5d2842902
+Author: sena <sena0711@gmail.com>
+Date:   Sun May 21 15:55:18 2017 +1200
+
+    BUG FIXED.  I am not getting controller... why !
+
+commit 8aee179c38a562b08e8d6752e0b54ffeccf4ce35
+Author: sena <sena0711@gmail.com>
+Date:   Sun May 21 04:58:43 2017 +1200
+
+    patrol working needs recompiling
+
+commit af6da1322f5fe4972ef47c452067e2f4fdd14fd7
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Fri May 19 13:23:28 2017 +1200
+
+    array of patrol points populated in blueprint
+
+commit f2cdaef135c17ca48b5a728eaacc696b59d102e9
+Author: xandredp <xduplooy@gmail.com>
+Date:   Fri May 19 09:37:43 2017 +1200
+
+    Populating array in blueprint
+
+commit 9beb6dd457a70f2b876559a2219c5c14f429d2b6
+Author: sena <sena0711@gmail.com>
+Date:   Thu May 18 17:54:45 2017 +1200
+
+    EnemyState included
+    
+     // passive patrolling mode
+     Neutral,
+     //hearing or seeing someone.
+     Suspicious,
+     //Running towards the player and attacking
+     Agression,
+     //Flee.
+     Flee,
+
+commit 4b50c75b797c1190d29e1530cddae9500f10db42
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Thu May 18 16:11:28 2017 +1200
+
+    TypeClass
+
+commit be504f9c5f2cafadb0aca4c80cf18e185cfdaa33
+Author: xandredp <xduplooy@gmail.com>
+Date:   Thu May 18 08:23:49 2017 +1200
+
+    Array of patrol points
+
+commit f049934f9452361152476bfae8a64f972554966a
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Wed May 17 17:13:07 2017 +1200
+
+    Blackboard, BehaviorTree, AIControllerBP, BTTask, PatrolPointBP, AICharacterBP
+
+commit 812aabbb8f561f7e77fba5d501e2c1f8e42851af
+Author: xandredp <xduplooy@gmail.com>
+Date:   Wed May 17 08:09:23 2017 +1200
+
+    Able to create blueprint class inside editor from plugin c++ class
+
+commit f2d23f1201de12384758dd75d7d2ea2c0790a22d
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Mon May 15 17:03:11 2017 +1200
+
+    AIComponent variables editable in AICharacter blueprint
+
+commit f660df35700baf987a74194c97c589b6ceb9f0cb
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Mon May 15 15:35:10 2017 +1200
+
+    AI Component Ready to be added to a character
+
+commit 57c691fb3a591580ef0fe6a77cde4f8b67e8d924
+Author: xandredp <xduplooy@gmail.com>
+Date:   Mon May 15 08:21:57 2017 +1200
+
+    character class with editable AI properties
+
+commit 609455d0686bd9509a61e7e4be0db5ec101c0dd7
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Wed May 10 15:36:59 2017 +1200
+
+    Plugin structure integrated into project
+
+commit c6129ba18938a3467c085bbe53c0360cd14b843a
+Author: Sena <sena0711@gmail.com>
+Date:   Wed May 3 11:59:45 2017 +1200
+
+    git update 2
+
+commit e70ca83fba13cc3ad15a2fe40bb999bd7eb126e1
+Author: Sena <sena0711@gmail.com>
+Date:   Wed May 3 11:57:24 2017 +1200
+
+    git ignore updated
+
+commit 59c6f952794ed126876ef7666e7406d98bdfff4c
+Author: Sena <sena0711@gmail.com>
+Date:   Wed May 3 11:40:35 2017 +1200
+
+    Trimmeddown the fat. Plz build vs and pj file
+
+commit 76e88ff6011e8d0d1f59080dcd1344d7d477bcd4
+Author: MDS\Xandre.plo6323 <xduplooy@gmail.com>
+Date:   Wed Apr 12 12:07:35 2017 +1200
+
+    Initial Commit
